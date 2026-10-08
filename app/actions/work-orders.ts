@@ -1,9 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { after } from "next/server";
 import { z } from "zod";
 import { requireRole } from "@/lib/auth/session";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { runOrderReviewSafely } from "@/lib/review/run";
 import type { ActionResult } from "@/lib/domain/action-result";
 import type { WorkOrderStatus } from "@/lib/domain/work-order-machine";
 import {
@@ -66,6 +68,10 @@ export async function transitionWorkOrder(
     return databaseFailure(undefined, "transition_work_order response");
   }
   revalidateOrderViews(parsed.data.orderId);
+  if (parsed.data.action === "complete") {
+    const orderId = parsed.data.orderId;
+    after(() => runOrderReviewSafely(orderId));
+  }
   return { ok: true, data: { status: result.data.status, nextOrderId: result.data.next_order_id } };
 }
 

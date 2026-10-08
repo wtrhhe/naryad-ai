@@ -22,6 +22,7 @@ const admin = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_RO
 const targets = [
   { name: "deadlines", path: "/api/cron/deadlines" },
   { name: "push", path: "/api/cron/push" },
+  { name: "reviews", path: "/api/cron/reviews" },
 ];
 
 async function configureTargets(): Promise<void> {
