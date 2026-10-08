@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { createPortal } from "react-dom";
 import { useCallback, useEffect, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Bell, X } from "lucide-react";
@@ -98,77 +99,85 @@ export function NotificationCenter({ employeeId }: { employeeId: string }) {
           </span>
         ) : null}
       </button>
-      {open ? (
-        <div
-          className="fixed inset-0 z-40 flex justify-end bg-black/50"
-          onClick={() => setOpen(false)}
-        >
-          <aside
-            aria-label={t("title")}
-            className="border-border bg-background flex h-full w-full max-w-md flex-col gap-3 overflow-y-auto border-l-2 p-4"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="flex items-center justify-between gap-2">
-              <h2 className="text-xl font-bold">{t("title")}</h2>
-              <div className="flex items-center gap-2">
-                {unread > 0 ? (
-                  <button
-                    type="button"
-                    onClick={() => void markAllRead()}
-                    className="text-accent min-h-11 px-2 text-sm font-semibold"
-                  >
-                    {t("markAllRead")}
-                  </button>
+      {open && typeof document !== "undefined"
+        ? createPortal(
+            <div
+              className="fixed inset-0 z-50 flex justify-end bg-black/50"
+              onClick={() => setOpen(false)}
+            >
+              <aside
+                aria-label={t("title")}
+                className="border-border bg-background flex h-full w-full max-w-md flex-col gap-3 overflow-y-auto border-l-2 px-4 pt-[calc(env(safe-area-inset-top)+1rem)] pb-[calc(env(safe-area-inset-bottom)+1rem)]"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <h2 className="text-xl font-bold">{t("title")}</h2>
+                  <div className="flex items-center gap-2">
+                    {unread > 0 ? (
+                      <button
+                        type="button"
+                        onClick={() => void markAllRead()}
+                        className="text-accent min-h-11 px-2 text-sm font-semibold"
+                      >
+                        {t("markAllRead")}
+                      </button>
+                    ) : null}
+                    <button
+                      type="button"
+                      onClick={() => setOpen(false)}
+                      aria-label={t("close")}
+                      className="flex min-h-11 min-w-11 items-center justify-center"
+                    >
+                      <X className="size-6" aria-hidden />
+                    </button>
+                  </div>
+                </div>
+                {items.length === 0 ? (
+                  <p className="text-muted py-10 text-center">{t("empty")}</p>
                 ) : null}
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  aria-label={t("close")}
-                  className="flex min-h-11 min-w-11 items-center justify-center"
-                >
-                  <X className="size-6" aria-hidden />
-                </button>
-              </div>
-            </div>
-            {items.length === 0 ? (
-              <p className="text-muted py-10 text-center">{t("empty")}</p>
-            ) : null}
-            <ul className="flex flex-col gap-2">
-              {items.map((item) => {
-                const href = notificationHref(item);
-                return (
-                  <li
-                    key={item.id}
-                    className={cn(
-                      "flex flex-col gap-1 rounded-lg border-2 p-3",
-                      item.is_urgent ? "border-danger" : "border-border",
-                      item.read_at === null ? "bg-surface" : "bg-transparent opacity-75",
-                    )}
-                  >
-                    <span className="font-semibold">{item.title}</span>
-                    <span className="text-muted text-sm">{item.body}</span>
-                    <div className="flex items-center justify-between gap-2 pt-1">
-                      <time className="text-muted font-mono text-xs" dateTime={item.created_at}>
-                        {format.relativeTime(new Date(item.created_at))}
-                      </time>
-                      {href ? (
-                        <Link
-                          href={href}
-                          onClick={() => setOpen(false)}
-                          className="text-accent min-h-11 content-center text-sm font-semibold"
-                        >
-                          {t("openOrder")}
-                        </Link>
-                      ) : null}
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </aside>
-        </div>
-      ) : null}
-      {urgent ? <EmergencyAlert notification={urgent} onClose={() => setUrgent(null)} /> : null}
+                <ul className="flex flex-col gap-2">
+                  {items.map((item) => {
+                    const href = notificationHref(item);
+                    return (
+                      <li
+                        key={item.id}
+                        className={cn(
+                          "flex flex-col gap-1 rounded-lg border-2 p-3",
+                          item.is_urgent ? "border-danger" : "border-border",
+                          item.read_at === null ? "bg-surface" : "bg-transparent opacity-75",
+                        )}
+                      >
+                        <span className="font-semibold">{item.title}</span>
+                        <span className="text-muted text-sm">{item.body}</span>
+                        <div className="flex items-center justify-between gap-2 pt-1">
+                          <time className="text-muted font-mono text-xs" dateTime={item.created_at}>
+                            {format.relativeTime(new Date(item.created_at))}
+                          </time>
+                          {href ? (
+                            <Link
+                              href={href}
+                              onClick={() => setOpen(false)}
+                              className="text-accent min-h-11 content-center text-sm font-semibold"
+                            >
+                              {t("openOrder")}
+                            </Link>
+                          ) : null}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </aside>
+            </div>,
+            document.body,
+          )
+        : null}
+      {urgent && typeof document !== "undefined"
+        ? createPortal(
+            <EmergencyAlert notification={urgent} onClose={() => setUrgent(null)} />,
+            document.body,
+          )
+        : null}
     </>
   );
 }
