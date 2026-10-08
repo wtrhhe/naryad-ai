@@ -32,6 +32,14 @@ function OrderCard({ order, overdue }: { order: BoardOrder; overdue: boolean }) 
       </div>
       <span className="text-sm leading-snug font-semibold">{order.equipmentName}</span>
       <span className="text-muted text-xs">{order.assigneeName ?? t("noAssignee")}</span>
+      {order.downtimeStartedAt && !order.downtimeEndedAt ? (
+        <DowntimeCounter
+          startedAt={order.downtimeStartedAt}
+          endedAt={null}
+          costPerHour={order.downtimeCostPerHour}
+          compact
+        />
+      ) : null}
       <div className="flex flex-wrap items-center justify-between gap-2">
         <StatusBadge status={order.status} overdue={overdue} />
         {due ? (
