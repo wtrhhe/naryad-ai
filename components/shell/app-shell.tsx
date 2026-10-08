@@ -6,6 +6,8 @@ import { resolveTheme, THEME_COOKIE } from "@/lib/theme";
 import { PreferencesMenu } from "./preferences-menu";
 import { RoleNav } from "./role-nav";
 import { SignOutButton } from "./sign-out-button";
+import { NotificationCenter } from "@/components/notifications/notification-center";
+import { PushSetup } from "@/components/notifications/push-setup";
 
 export async function AppShell({
   employee,
@@ -36,13 +38,19 @@ export async function AppShell({
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <NotificationCenter employeeId={employee.id} />
           <PreferencesMenu theme={theme} />
           <SignOutButton label={auth("signOut")} />
         </div>
       </header>
       <div className="flex flex-1">
         <RoleNav role={employee.role} variant="sidebar" />
-        <main className="w-full flex-1 px-4 pt-5 pb-28 md:px-8 md:pb-10">{children}</main>
+        <main className="w-full flex-1 px-4 pt-5 pb-28 md:px-8 md:pb-10">
+          <div className="mb-4 empty:hidden">
+            <PushSetup />
+          </div>
+          {children}
+        </main>
       </div>
       <RoleNav role={employee.role} variant="bottom" />
     </div>
