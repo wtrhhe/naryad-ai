@@ -3,8 +3,13 @@
     "board": "Ауысым панелі",
     "newOrder": "Жаңа наряд",
     "orders": "Нарядтар",
+    "assistant": "Көмекші",
     "lockouts": "Бұғаттаулар",
-    "analytics": "Талдау"
+    "equipment": "Жабдық",
+    "analytics": "Талдау",
+    "rca": "Себептерді талдау",
+    "rating": "Рейтинг",
+    "reports": "Есептер"
   },
   "worker": {
     "orders": "Менің нарядтарым",
@@ -14,11 +19,18 @@
   "manager": {
     "dashboard": "Дашборд",
     "reports": "Есептер",
-    "analytics": "Талдау"
+    "analytics": "Талдау",
+    "rating": "Рейтинг"
   },
   "admin": {
     "references": "Анықтамалықтар",
     "employees": "Қызметкерлер",
-    "settings": "Баптаулар"
+    "settings": "Баптаулар",
+    "demo": "Демо",
+    "qr": "QR-жапсырмалар"
+  },
+  "menu": {
+    "more": "Тағы",
+    "close": "Жабу"
   }
 }

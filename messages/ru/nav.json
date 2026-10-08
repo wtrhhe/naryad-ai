@@ -3,8 +3,13 @@
     "board": "Панель смены",
     "newOrder": "Новый наряд",
     "orders": "Наряды",
+    "assistant": "Ассистент",
     "lockouts": "Блокировки",
-    "analytics": "Аналитика"
+    "equipment": "Оборудование",
+    "analytics": "Аналитика",
+    "rca": "Разбор причин",
+    "rating": "Рейтинг",
+    "reports": "Отчёты"
   },
   "worker": {
     "orders": "Мои наряды",
@@ -14,11 +19,18 @@
   "manager": {
     "dashboard": "Дашборд",
     "reports": "Отчёты",
-    "analytics": "Аналитика"
+    "analytics": "Аналитика",
+    "rating": "Рейтинг"
   },
   "admin": {
     "references": "Справочники",
     "employees": "Сотрудники",
-    "settings": "Настройки"
+    "settings": "Настройки",
+    "demo": "Демо",
+    "qr": "QR-наклейки"
+  },
+  "menu": {
+    "more": "Ещё",
+    "close": "Закрыть"
   }
 }

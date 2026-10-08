@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isActiveNavItem, NAVIGATION } from "@/lib/navigation";
+import { isActiveNavItem, NAVIGATION, splitNavigation } from "@/lib/navigation";
 import { roleForPath } from "@/lib/auth/roles";
 
 describe("isActiveNavItem", () => {
@@ -23,6 +23,16 @@ describe("NAVIGATION", () => {
   it("keeps every link inside the role's own section", () => {
     Object.entries(NAVIGATION).forEach(([role, items]) => {
       items.forEach((item) => expect(roleForPath(item.href)).toBe(role));
+    });
+  });
+});
+
+describe("splitNavigation", () => {
+  it("keeps at most four primary items for the bottom bar", () => {
+    Object.values(NAVIGATION).forEach((items) => {
+      const { primary, more } = splitNavigation(items);
+      expect(primary.length).toBeLessThanOrEqual(4);
+      expect(primary.length + more.length).toBe(items.length);
     });
   });
 });

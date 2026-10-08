@@ -1,5 +1,7 @@
 import {
   BarChart3,
+  Bot,
+  Clapperboard,
   Database,
   FileText,
   History,
@@ -7,9 +9,12 @@ import {
   List,
   Lock,
   Plus,
+  QrCode,
+  SearchCheck,
   Settings,
   Star,
   Users,
+  Wrench,
   type LucideIcon,
 } from "lucide-react";
 import type { NavIcon as NavIconName } from "@/lib/navigation";
@@ -26,6 +31,11 @@ const ICONS: Record<NavIconName, LucideIcon> = {
   database: Database,
   users: Users,
   settings: Settings,
+  wrench: Wrench,
+  search: SearchCheck,
+  assistant: Bot,
+  qr: QrCode,
+  demo: Clapperboard,
 };
 
 export function NavIcon({ name, className }: { name: NavIconName; className?: string }) {
