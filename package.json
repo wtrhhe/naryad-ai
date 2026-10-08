@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:https": "next dev --experimental-https",
+    "dev": "next dev -p 3010",
+    "dev:https": "next dev -p 3010 --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
@@ -22,6 +22,7 @@
     "seed": "tsx --env-file=.env.local scripts/seed.ts",
     "icons": "tsx scripts/generate-icons.ts",
     "gen:transition-test": "tsx scripts/gen-transition-test.ts",
+    "cron:configure": "tsx --env-file=.env.local scripts/configure-cron.ts --base-url=http://host.docker.internal:3010",
     "check": "npm run lint && npm run typecheck && npm test && npm run build"
   },
   "dependencies": {

@@ -732,6 +732,9 @@ isOneToOne: false
 "check_start_gate":
 { Args: { "actor_id": string,"order_id": string }; Returns: Json
                            },
+"configure_cron_target":
+{ Args: { "target": string,"target_secret": string,"target_url": string }; Returns: undefined
+                           },
 "create_work_order":
 { Args: { "payload": Json }; Returns: Json
                            },
