@@ -46,8 +46,12 @@ select results_eq(
   $$values ('00000000-0000-0000-0000-0000000000d1'::uuid)$$,
   'worker sees only own work orders'
 );
-select is((select count(*)::int from public.notifications), 1, 'worker sees only own notifications');
-select is((select count(*)::int from public.sites), 2, 'worker reads reference data');
+select is(
+  (select count(*)::int from public.notifications where recipient_id <> '00000000-0000-0000-0000-0000000000e1'),
+  0,
+  'worker sees only own notifications'
+);
+select is((select count(*)::int from public.sites where code in ('T1', 'T2')), 2, 'worker reads reference data');
 select throws_ok(
   $$update public.work_orders set status = 'closed' where id = '00000000-0000-0000-0000-0000000000d1'$$,
   '42501', null, 'worker cannot change work order status directly'
@@ -65,7 +69,7 @@ select throws_ok(
   '42501', null, 'notification text is read only'
 );
 select lives_ok(
-  $$update public.notifications set read_at = now()$$,
+  $$update public.notifications set read_at = now() where recipient_id = '00000000-0000-0000-0000-0000000000e1'$$,
   'worker can mark own notifications read'
 );
 select is(
@@ -91,7 +95,11 @@ reset role;
 
 select pg_temp.act_as('00000000-0000-0000-0000-00000000a004');
 set local role authenticated;
-select is((select count(*)::int from public.work_orders), 2, 'manager reads all work orders');
+select is(
+  (select count(*)::int from public.work_orders where id in ('00000000-0000-0000-0000-0000000000d1', '00000000-0000-0000-0000-0000000000d2')),
+  2,
+  'manager reads work orders of every site'
+);
 select throws_ok(
   $$select public.hit_rate_limit('x', 1, 60)$$,
   '42501', null, 'clients cannot call the rate limiter'

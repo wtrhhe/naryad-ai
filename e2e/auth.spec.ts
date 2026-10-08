@@ -27,7 +27,9 @@ test.describe("sign in by personnel number and PIN", () => {
 
   test("wrong PIN shows an error with remaining attempts", async ({ page }) => {
     await signIn(page, "2015", "0000");
-    await expect(page.getByRole("alert")).toContainText("Неверный табельный номер или ПИН-код");
+    await expect(page.locator("form [role=alert]")).toContainText(
+      "Неверный табельный номер или ПИН-код",
+    );
   });
 
   test("protected pages redirect anonymous visitors to sign in", async ({ page }) => {
