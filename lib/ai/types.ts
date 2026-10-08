@@ -56,10 +56,21 @@ export interface AiToolCall {
   input: unknown;
 }
 
+export interface AiProviderContent {
+  provider: "claude" | "ollama" | "mock";
+  model: string;
+  blocks: unknown;
+}
+
 export type AiChatMessage =
   | { role: "user"; content: string }
-  | { role: "assistant"; content: string; toolCalls?: readonly AiToolCall[] }
-  | { role: "tool"; toolCallId: string; content: string };
+  | {
+      role: "assistant";
+      content: string;
+      toolCalls?: readonly AiToolCall[];
+      providerContent?: AiProviderContent;
+    }
+  | { role: "tool"; toolCallId: string; content: string; isError?: boolean };
 
 export interface AiToolsRequest extends AiCallContext {
   tier: AiTier;
@@ -73,6 +84,14 @@ export interface AiToolsResponse {
   text: string;
   toolCalls: readonly AiToolCall[];
   stopReason: "end" | "tool_use" | "max_tokens";
+  assistantMessage?: AiChatMessage;
+}
+
+export interface AiUsage {
+  inputTokens: number;
+  outputTokens: number;
+  cacheReadTokens: number;
+  cacheWriteTokens: number;
 }
 
 export interface AiResult<T> {
@@ -80,19 +99,28 @@ export interface AiResult<T> {
   value: T;
   model: string;
   cached: boolean;
+  usage?: AiUsage;
 }
+
+export type AiFailureCode =
+  "disabled" | "timeout" | "invalid_response" | "rate_limited" | "provider_error";
 
 export interface AiFailure {
   ok: false;
-  error: "disabled" | "timeout" | "invalid_response" | "rate_limited" | "provider_error";
+  error: AiFailureCode;
   message: string;
+  model?: string;
+  usage?: AiUsage;
 }
 
 export type AiOutcome<T> = AiResult<T> | AiFailure;
 
+export type AiProviderName = "claude" | "ollama" | "mock";
+
 export interface AiProvider {
-  readonly name: "claude" | "ollama" | "mock";
+  readonly name: AiProviderName;
   readonly enabled: boolean;
+  modelFor?(tier: AiTier): string;
   json<T>(request: AiJsonRequest<T>): Promise<AiOutcome<T>>;
   text(request: AiTextRequest): Promise<AiOutcome<string>>;
   tools(request: AiToolsRequest): Promise<AiOutcome<AiToolsResponse>>;
