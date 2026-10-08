@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parsePublicEnv, parseServerEnv } from "@/lib/env";
+import { parseAiEnv, parsePublicEnv, parseServerEnv } from "@/lib/env";
 
 const validPublic = {
   NEXT_PUBLIC_SUPABASE_URL: "http://127.0.0.1:54321",
@@ -37,6 +37,10 @@ describe("parseServerEnv", () => {
     expect(() => parseServerEnv({ ...validServer, AI_PROVIDER: "gpt" })).toThrow(/AI_PROVIDER/);
   });
 
+  it("accepts the offline mock AI provider", () => {
+    expect(parseServerEnv({ ...validServer, AI_PROVIDER: "mock" }).AI_PROVIDER).toBe("mock");
+  });
+
   it("requires the service role key", () => {
     expect(() => parseServerEnv({ AUTH_PIN_PEPPER: "x".repeat(32) })).toThrow(
       /SUPABASE_SERVICE_ROLE_KEY/,
@@ -47,5 +51,27 @@ describe("parseServerEnv", () => {
     expect(() => parseServerEnv({ ...validServer, AUTH_PIN_PEPPER: "short" })).toThrow(
       /AUTH_PIN_PEPPER/,
     );
+  });
+});
+
+describe("parseAiEnv", () => {
+  it("reads only the AI settings with defaults", () => {
+    expect(parseAiEnv({})).toEqual({
+      AI_PROVIDER: "claude",
+      ANTHROPIC_API_KEY: "",
+      ANTHROPIC_MODEL_SMART: "claude-sonnet-5-5",
+      ANTHROPIC_MODEL_FAST: "claude-haiku-5-5",
+      OLLAMA_BASE_URL: "http://localhost:11434",
+      OLLAMA_MODEL: "qwen2.5vl:7b",
+    });
+  });
+
+  it("does not require unrelated server secrets", () => {
+    expect(parseAiEnv({ AI_PROVIDER: "ollama", OLLAMA_MODEL: "llava" }).OLLAMA_MODEL).toBe("llava");
+  });
+
+  it("rejects invalid AI settings", () => {
+    expect(() => parseAiEnv({ AI_PROVIDER: "gpt" })).toThrow(/Invalid AI environment.*AI_PROVIDER/);
+    expect(() => parseAiEnv({ OLLAMA_BASE_URL: "nope" })).toThrow(/OLLAMA_BASE_URL/);
   });
 });
