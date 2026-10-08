@@ -1,12 +1,11 @@
 import type { ReactNode } from "react";
 import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
-import { LogOut } from "lucide-react";
-import { signOut } from "@/app/actions/auth";
 import type { CurrentEmployee } from "@/lib/auth/session";
 import { resolveTheme, THEME_COOKIE } from "@/lib/theme";
 import { PreferencesMenu } from "./preferences-menu";
 import { RoleNav } from "./role-nav";
+import { SignOutButton } from "./sign-out-button";
 
 export async function AppShell({
   employee,
@@ -38,15 +37,7 @@ export async function AppShell({
         </div>
         <div className="flex items-center gap-2">
           <PreferencesMenu theme={theme} />
-          <form action={signOut}>
-            <button
-              type="submit"
-              aria-label={auth("signOut")}
-              className="border-border text-muted hover:text-foreground flex min-h-11 min-w-11 items-center justify-center rounded-lg border-2"
-            >
-              <LogOut className="size-5" aria-hidden />
-            </button>
-          </form>
+          <SignOutButton label={auth("signOut")} />
         </div>
       </header>
       <div className="flex flex-1">

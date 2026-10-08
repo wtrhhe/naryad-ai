@@ -3,9 +3,10 @@ import { createServerClient } from "@supabase/ssr";
 import type { Database } from "@/lib/supabase/database.types";
 import { buildContentSecurityPolicy, createNonce } from "@/lib/security/csp";
 import { isProtectedPath } from "@/lib/auth/roles";
+import { publicEnv } from "@/lib/public-env";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
+const supabaseUrl = publicEnv.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = publicEnv.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 export async function proxy(request: NextRequest) {
   const nonce = createNonce();

@@ -86,7 +86,7 @@ email_sent = 2
 sms_sent = 30
 anonymous_users = 30
 token_refresh = 150
-sign_in_sign_ups = 30
+sign_in_sign_ups = 300
 token_verifications = 30
 web3 = 30
 

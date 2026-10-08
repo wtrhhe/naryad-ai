@@ -33,13 +33,15 @@ export function LoginForm({ next }: { next: string }) {
       <label className="flex flex-col gap-2">
         <span className="text-base font-semibold">{t("personnelNumber")}</span>
         <Input
+          key={state?.personnelNumber ?? "initial"}
           name="personnelNumber"
+          defaultValue={state?.personnelNumber ?? ""}
           inputMode="numeric"
           autoComplete="username"
           pattern="[0-9]*"
           maxLength={10}
           required
-          autoFocus
+          autoFocus={!state}
           aria-invalid={state?.error === "invalid_input" || state?.error === "invalid_credentials"}
         />
       </label>

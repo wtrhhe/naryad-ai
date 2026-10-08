@@ -9,7 +9,8 @@ import {
 
 export const MAX_FAILED_ATTEMPTS = 5;
 export const LOCK_MINUTES = 5;
-export const IP_RATE_LIMIT = { maxHits: 30, windowSeconds: 60 } as const;
+export const IP_RATE_LIMIT = { maxHits: 20, windowSeconds: 300 } as const;
+export const NUMBER_ATTEMPT_CAP = { maxHits: 8, windowSeconds: 600 } as const;
 
 export const loginInputSchema = z.object({
   personnelNumber: personnelNumberSchema,
@@ -20,7 +21,7 @@ export type LoginErrorCode =
   "invalid_input" | "invalid_credentials" | "locked" | "rate_limited" | "inactive" | "unavailable";
 
 export type LoginResult =
-  | { ok: true; role: AppRole }
+  | { ok: true; role: AppRole; locale: string }
   | { ok: false; error: LoginErrorCode; lockMinutes?: number; attemptsLeft?: number };
 
 export interface LoginDependencies {
@@ -32,7 +33,9 @@ export interface LoginDependencies {
   recentFailures: (personnelNumber: string) => Promise<number>;
   recordAttempt: (personnelNumber: string, succeeded: boolean) => Promise<void>;
   signInWithPassword: (email: string, password: string) => Promise<{ authUserId: string } | null>;
-  findEmployeeRole: (authUserId: string) => Promise<{ role: string; isActive: boolean } | null>;
+  findEmployeeRole: (
+    authUserId: string,
+  ) => Promise<{ role: string; isActive: boolean; locale: string } | null>;
   signOut: () => Promise<void>;
 }
 
@@ -63,7 +66,7 @@ async function resolveRole(authUserId: string, deps: LoginDependencies): Promise
     await deps.signOut();
     return { ok: false, error: "inactive" };
   }
-  return { ok: true, role: role.data };
+  return { ok: true, role: role.data, locale: employee.locale };
 }
 
 export async function authenticateWithPin(
@@ -76,13 +79,29 @@ export async function authenticateWithPin(
   }
   const { personnelNumber, pin } = input.data;
   try {
-    const ipBucket = `login:ip:${deps.clientIp ?? "unknown"}`;
+    const ipBucket = deps.clientIp
+      ? `login:ip:${deps.clientIp}`
+      : `login:ip:unknown:${personnelNumber}`;
     if (!(await deps.hitRateLimit(ipBucket, IP_RATE_LIMIT.maxHits, IP_RATE_LIMIT.windowSeconds))) {
       return { ok: false, error: "rate_limited" };
     }
     const lockSeconds = await deps.lockSeconds(personnelNumber);
     if (lockSeconds > 0) {
       return { ok: false, error: "locked", lockMinutes: minutesFromSeconds(lockSeconds) };
+    }
+    const numberBucket = `login:number:${personnelNumber}`;
+    if (
+      !(await deps.hitRateLimit(
+        numberBucket,
+        NUMBER_ATTEMPT_CAP.maxHits,
+        NUMBER_ATTEMPT_CAP.windowSeconds,
+      ))
+    ) {
+      return {
+        ok: false,
+        error: "locked",
+        lockMinutes: minutesFromSeconds(NUMBER_ATTEMPT_CAP.windowSeconds),
+      };
     }
     const session = await deps.signInWithPassword(
       personnelEmail(personnelNumber, deps.emailDomain),

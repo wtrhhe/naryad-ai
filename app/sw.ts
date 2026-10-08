@@ -7,6 +7,7 @@ import {
   readNotificationUrl,
   selectWindowClient,
 } from "../components/pwa/push-payload";
+import { withoutPrivateCaches } from "../components/pwa/runtime-caching";
 
 declare global {
   interface WorkerGlobalScope extends SerwistGlobalConfig {
@@ -23,7 +24,7 @@ const serwist = new Serwist({
   skipWaiting: true,
   clientsClaim: true,
   navigationPreload: true,
-  runtimeCaching: defaultCache,
+  runtimeCaching: withoutPrivateCaches(defaultCache),
   fallbacks: {
     entries: [
       {

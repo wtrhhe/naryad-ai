@@ -13,7 +13,7 @@ function createDeps(overrides: Partial<LoginDependencies> = {}): LoginDependenci
     recentFailures: vi.fn(async () => 1),
     recordAttempt: vi.fn(async () => undefined),
     signInWithPassword: vi.fn(async () => ({ authUserId: "auth-1" })),
-    findEmployeeRole: vi.fn(async () => ({ role: "worker", isActive: true })),
+    findEmployeeRole: vi.fn(async () => ({ role: "worker", isActive: true, locale: "kk" })),
     signOut: vi.fn(async () => undefined),
     ...overrides,
   };
@@ -31,6 +31,7 @@ describe("authenticateWithPin", () => {
     await expect(authenticateWithPin(validInput, deps)).resolves.toEqual({
       ok: true,
       role: "worker",
+      locale: "kk",
     });
     expect(deps.recordAttempt).toHaveBeenCalledWith("2001", true);
     expect(deps.signInWithPassword).toHaveBeenCalledWith("2001@naryad.local", expect.any(String));
@@ -100,7 +101,7 @@ describe("authenticateWithPin", () => {
 
   it("signs out and refuses an inactive employee", async () => {
     const deps = createDeps({
-      findEmployeeRole: vi.fn(async () => ({ role: "worker", isActive: false })),
+      findEmployeeRole: vi.fn(async () => ({ role: "worker", isActive: false, locale: "ru" })),
     });
     await expect(authenticateWithPin(validInput, deps)).resolves.toEqual({
       ok: false,
@@ -116,6 +117,23 @@ describe("authenticateWithPin", () => {
       error: "inactive",
     });
     expect(deps.signOut).toHaveBeenCalled();
+  });
+
+  it("caps attempts per personnel number atomically even under parallel requests", async () => {
+    const hitRateLimit = vi.fn(async (bucket: string) => !bucket.startsWith("login:number:"));
+    const deps = createDeps({ hitRateLimit });
+    await expect(authenticateWithPin(validInput, deps)).resolves.toEqual({
+      ok: false,
+      error: "locked",
+      lockMinutes: 10,
+    });
+    expect(deps.signInWithPassword).not.toHaveBeenCalled();
+  });
+
+  it("does not let requests without an IP share one global bucket", async () => {
+    const deps = createDeps({ clientIp: null });
+    await authenticateWithPin(validInput, deps);
+    expect(deps.hitRateLimit).toHaveBeenCalledWith("login:ip:unknown:2001", 20, 300);
   });
 
   it("reports the service as unavailable when a dependency throws", async () => {
