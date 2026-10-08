@@ -16,7 +16,7 @@ export const COMPLEXITY_BY_PRIORITY: Readonly<Record<string, number>> = {
 
 export interface ClosedOrderFact {
   orderId: string;
-  assigneeId: string;
+  assigneeId: string | null;
   brigadeId: string | null;
   equipmentId: string;
   faultCodeId: string | null;
@@ -77,7 +77,7 @@ export function repeatFailureIds(
   return repeated;
 }
 
-function isOnTime(fact: ClosedOrderFact): boolean {
+export function isOnTime(fact: ClosedOrderFact): boolean {
   if (!fact.dueAt) return true;
   const finished = new Date(fact.doneAt ?? fact.closedAt).getTime();
   return finished <= new Date(fact.dueAt).getTime();
