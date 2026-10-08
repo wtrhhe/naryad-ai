@@ -5,6 +5,7 @@ import { effectiveDueAt } from "@/lib/domain/overdue";
 import { PriorityBadge } from "@/components/work-orders/priority-badge";
 import { StatusBadge } from "@/components/work-orders/status-badge";
 import { cn } from "@/lib/utils";
+import { DowntimeCounter } from "@/components/downtime/downtime-counter";
 
 function OrderCard({ order, overdue }: { order: BoardOrder; overdue: boolean }) {
   const t = useTranslations("board.card");

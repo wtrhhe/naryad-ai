@@ -17,8 +17,8 @@ insert into public.employees (id, auth_user_id, personnel_number, full_name, rol
 insert into public.employee_sites (employee_id, site_id) values
   ('00000000-0000-0000-0000-0000000001e3', '00000000-0000-0000-0000-0000000001b1');
 
-insert into public.equipment (id, site_id, name, inventory_number, equipment_type, downtime_cost_per_hour) values
-  ('00000000-0000-0000-0000-0000000001c1', '00000000-0000-0000-0000-0000000001b1', 'Насос Т-1', 'INV-TT1', 'pump', 360000);
+insert into public.equipment (id, site_id, name, inventory_number, equipment_type, downtime_cost_per_hour, requires_lockout) values
+  ('00000000-0000-0000-0000-0000000001c1', '00000000-0000-0000-0000-0000000001b1', 'Насос Т-1', 'INV-TT1', 'pump', 360000, false);
 
 insert into public.fault_codes (id, code, category, name, standard_hours, required_specialty) values
   ('00000000-0000-0000-0000-0000000001f1', 'М-99', 'mechanical', 'Тестовая неисправность', 2, 'fitter');

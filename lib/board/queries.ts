@@ -6,7 +6,7 @@ import type { ShiftWindow } from "@/lib/board/shift";
 const OPEN = "(issued,queued,accepted,in_progress,paused,done,ai_review,rework)";
 
 const ORDER_COLUMNS =
-  "id, number, status, priority, kind, issued_at, due_at, standard_hours, closed_at, downtime_started_at, downtime_ended_at, site_id, equipment_id, assignee_id, equipment:equipment_id(name), assignee:employees!work_orders_assignee_id_fkey(full_name)";
+  "id, number, status, priority, kind, issued_at, due_at, standard_hours, closed_at, downtime_started_at, downtime_ended_at, site_id, equipment_id, assignee_id, equipment:equipment_id(name, downtime_cost_per_hour), assignee:employees!work_orders_assignee_id_fkey(full_name)";
 
 interface OrderRecord {
   id: string;
@@ -23,7 +23,7 @@ interface OrderRecord {
   site_id: string;
   equipment_id: string;
   assignee_id: string | null;
-  equipment: { name: string } | null;
+  equipment: { name: string; downtime_cost_per_hour: number } | null;
   assignee: { full_name: string } | null;
 }
 
@@ -43,6 +43,7 @@ function toBoardOrder(row: OrderRecord): BoardOrder {
     siteId: row.site_id,
     equipmentId: row.equipment_id,
     equipmentName: row.equipment?.name ?? "",
+    downtimeCostPerHour: Number(row.equipment?.downtime_cost_per_hour ?? 0),
     assigneeId: row.assignee_id,
     assigneeName: row.assignee?.full_name ?? null,
   };

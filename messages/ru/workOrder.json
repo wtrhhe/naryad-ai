@@ -55,7 +55,9 @@
     "not_found": "Наряд не найден.",
     "validation": "Проверьте заполнение полей.",
     "unavailable": "Сервис недоступен. Повторите попытку.",
-    "equipment_not_found": "Оборудование не найдено."
+    "equipment_not_found": "Оборудование не найдено.",
+    "permit_missing": "Нет действующего допуска для этих работ.",
+    "lockout_photo_required": "Сфотографируйте замок и бирку LOTO."
   },
   "fields": {
     "description": "Описание",

@@ -17,6 +17,7 @@ import type analytics from "./messages/ru/analytics.json";
 import type offline from "./messages/ru/offline.json";
 import type rating from "./messages/ru/rating.json";
 import type review from "./messages/ru/review.json";
+import type safety from "./messages/ru/safety.json";
 import type { Locale } from "./i18n/config";
 
 declare module "next-intl" {
@@ -42,6 +43,7 @@ declare module "next-intl" {
       offline: typeof offline;
       rating: typeof rating;
       review: typeof review;
+      safety: typeof safety;
     };
   }
 }

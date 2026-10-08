@@ -277,14 +277,14 @@ isOneToOne: false
                   ]
                 },"lockouts": {
                   Row: {
-                    "ai_check": Json | null,"created_at": string,"equipment_id": string,"id": string,"locked_at": string,"locked_by": string,"released_at": string | null,"released_by": string | null,"tag_photo_path": string | null,"work_order_id": string
+                    "ai_check": Json | null,"checklist": NonNullable<Json>,"created_at": string,"equipment_id": string,"id": string,"locked_at": string,"locked_by": string,"released_at": string | null,"released_by": string | null,"tag_photo_path": string | null,"work_order_id": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "ai_check"?: Json | null,"created_at"?: string,"equipment_id": string,"id"?: string,"locked_at"?: string,"locked_by": string,"released_at"?: string | null,"released_by"?: string | null,"tag_photo_path"?: string | null,"work_order_id": string
+                    "ai_check"?: Json | null,"checklist"?: NonNullable<Json>,"created_at"?: string,"equipment_id": string,"id"?: string,"locked_at"?: string,"locked_by": string,"released_at"?: string | null,"released_by"?: string | null,"tag_photo_path"?: string | null,"work_order_id": string
                   }
                   Update: {
-                    "ai_check"?: Json | null,"created_at"?: string,"equipment_id"?: string,"id"?: string,"locked_at"?: string,"locked_by"?: string,"released_at"?: string | null,"released_by"?: string | null,"tag_photo_path"?: string | null,"work_order_id"?: string
+                    "ai_check"?: Json | null,"checklist"?: NonNullable<Json>,"created_at"?: string,"equipment_id"?: string,"id"?: string,"locked_at"?: string,"locked_by"?: string,"released_at"?: string | null,"released_by"?: string | null,"tag_photo_path"?: string | null,"work_order_id"?: string
                   }
                   Relationships: [
                     {
@@ -553,6 +553,20 @@ isOneToOne: false
                   Relationships: [
                     
                   ]
+                },"safety_checklist_items": {
+                  Row: {
+                    "created_at": string,"equipment_type": Database["public"]['Enums']["equipment_type"] | null,"fault_category": Database["public"]['Enums']["fault_category"] | null,"id": string,"is_active": boolean,"sort_order": number,"text": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"equipment_type"?: Database["public"]['Enums']["equipment_type"] | null,"fault_category"?: Database["public"]['Enums']["fault_category"] | null,"id"?: string,"is_active"?: boolean,"sort_order"?: number,"text": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "created_at"?: string,"equipment_type"?: Database["public"]['Enums']["equipment_type"] | null,"fault_category"?: Database["public"]['Enums']["fault_category"] | null,"id"?: string,"is_active"?: boolean,"sort_order"?: number,"text"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    
+                  ]
                 },"settings": {
                   Row: {
                     "key": string,"updated_at": string,"updated_by": string | null,"value": NonNullable<Json>
@@ -655,9 +669,9 @@ isOneToOne: false
                   ]
                 },"work_orders": {
                   Row: {
-                    "accepted_at": string | null,"assignee_id": string | null,"brigade_id": string | null,"cancelled_at": string | null,"close_comment": string | null,"closed_at": string | null,"comment": string | null,"created_at": string,"description": string,"done_at": string | null,"downtime_cost": number | null,"downtime_ended_at": string | null,"downtime_started_at": string | null,"due_at": string | null,"equipment_id": string,"fault_code_id": string | null,"id": string,"issued_at": string,"kind": Database["public"]['Enums']["work_order_type"],"last_comment": string | null,"master_id": string,"number": number,"paused_at": string | null,"paused_seconds": number,"priority": Database["public"]['Enums']["work_order_priority"],"queue_position": number | null,"queued_at": string | null,"rejected_at": string | null,"review_started_at": string | null,"rework_count": number,"shift_crew": Database["public"]['Enums']["shift_crew"] | null,"shift_period": Database["public"]['Enums']["shift_period"],"site_id": string,"standard_hours": number | null,"started_at": string | null,"status": Database["public"]['Enums']["work_order_status"],"suggested_fault_code_id": string | null,"suggested_standard_hours": number | null,"suggestion": Json | null,"updated_at": string,"work_performed": string | null
+                    "accepted_at": string | null,"assignee_id": string | null,"brigade_id": string | null,"cancelled_at": string | null,"close_comment": string | null,"closed_at": string | null,"comment": string | null,"created_at": string,"description": string,"done_at": string | null,"downtime_cost": number | null,"downtime_ended_at": string | null,"downtime_started_at": string | null,"due_at": string | null,"equipment_id": string,"fault_code_id": string | null,"id": string,"issued_at": string,"kind": Database["public"]['Enums']["work_order_type"],"last_comment": string | null,"master_id": string,"number": number,"paused_at": string | null,"paused_seconds": number,"priority": Database["public"]['Enums']["work_order_priority"],"queue_position": number | null,"queued_at": string | null,"rejected_at": string | null,"review_started_at": string | null,"rework_count": number,"shift_crew": Database["public"]['Enums']["shift_crew"] | null,"shift_period": Database["public"]['Enums']["shift_period"],"site_id": string,"standard_hours": number | null,"started_at": string | null,"status": Database["public"]['Enums']["work_order_status"],"suggested_fault_code_id": string | null,"suggested_standard_hours": number | null,"suggestion": Json | null,"updated_at": string,"work_performed": string | null,"order_fault_category": Database["public"]['Enums']["fault_category"] | null
                   }
-                  ComputedFields: never
+                  ComputedFields: "order_fault_category"
                   Insert: {
                     "accepted_at"?: string | null,"assignee_id"?: string | null,"brigade_id"?: string | null,"cancelled_at"?: string | null,"close_comment"?: string | null,"closed_at"?: string | null,"comment"?: string | null,"created_at"?: string,"description": string,"done_at"?: string | null,"downtime_cost"?: number | null,"downtime_ended_at"?: string | null,"downtime_started_at"?: string | null,"due_at"?: string | null,"equipment_id": string,"fault_code_id"?: string | null,"id"?: string,"issued_at"?: string,"kind": Database["public"]['Enums']["work_order_type"],"last_comment"?: string | null,"master_id": string,"number"?: number,"paused_at"?: string | null,"paused_seconds"?: number,"priority": Database["public"]['Enums']["work_order_priority"],"queue_position"?: number | null,"queued_at"?: string | null,"rejected_at"?: string | null,"review_started_at"?: string | null,"rework_count"?: number,"shift_crew"?: Database["public"]['Enums']["shift_crew"] | null,"shift_period": Database["public"]['Enums']["shift_period"],"site_id": string,"standard_hours"?: number | null,"started_at"?: string | null,"status"?: Database["public"]['Enums']["work_order_status"],"suggested_fault_code_id"?: string | null,"suggested_standard_hours"?: number | null,"suggestion"?: Json | null,"updated_at"?: string,"work_performed"?: string | null
                   }
@@ -715,9 +729,12 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "assignee_board":
-{ Args: { "target_equipment_type"?: Database["public"]['Enums']["equipment_type"] }; Returns: {
-              "active_order_id": string,"active_order_number": number,"brigade_id": string,"closed_on_type": number,"employee_id": string,"full_name": string,"grade": number,"on_shift": boolean,"queue_length": number,"specialty": Database["public"]['Enums']["specialty"]
+            "apply_lockout":
+{ Args: { "ai_check": Json,"checklist": Json,"order_id": string,"tag_photo_path": string }; Returns: Json
+                           },
+"assignee_board":
+{ Args: { "target_equipment_type"?: Database["public"]['Enums']["equipment_type"],"target_fault_category"?: Database["public"]['Enums']["fault_category"] }; Returns: {
+              "active_order_id": string,"active_order_number": number,"brigade_id": string,"closed_on_type": number,"employee_id": string,"full_name": string,"grade": number,"missing_permits": (string)[],"on_shift": boolean,"queue_length": number,"specialty": Database["public"]['Enums']["specialty"]
             }[]
                            },
 "attach_standard_triggers":
@@ -759,14 +776,33 @@ isOneToOne: false
 "login_recent_failures":
 { Args: { "lock_minutes"?: number,"number": string }; Returns: number
                            },
+"missing_permits":
+{ Args: { "order_id": string,"target_employee_id": string }; Returns: {
+              "code": string,"expired_on": string,"name": string,"permit_type_id": string
+            }[]
+                           },
+"order_fault_category":
+{ Args: { "target": Omit<Database["public"]['Tables']["work_orders"]['Row'], Database["public"]['Tables']["work_orders"]['ComputedFields']> }; Returns: Database["public"]['Enums']["fault_category"]
+                           },
 "purge_service_tables":
 { Args: Record<PropertyKey, never>; Returns: undefined
                            },
 "record_login_attempt":
 { Args: { "client_ip"?: unknown,"number": string,"succeeded": boolean }; Returns: undefined
                            },
+"release_lockout":
+{ Args: { "order_id": string }; Returns: undefined
+                           },
+"required_permits":
+{ Args: { "order_id": string }; Returns: {
+              "code": string,"name": string,"permit_type_id": string
+            }[]
+                           },
 "shift_period_at":
 { Args: { "moment": string }; Returns: Database["public"]['Enums']["shift_period"]
+                           },
+"start_gate":
+{ Args: { "order_id": string }; Returns: Json
                            },
 "storage_order_id":
 { Args: { "object_name": string }; Returns: string

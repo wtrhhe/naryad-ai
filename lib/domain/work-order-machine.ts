@@ -136,6 +136,8 @@ export type TransitionErrorCode =
   | "closing_required"
   | "after_photo_required"
   | "start_gate_blocked"
+  | "permit_missing"
+  | "lockout_photo_required"
   | "stale_status"
   | "not_found";
 

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  activeDowntime,
   applyFilters,
   buildColumns,
   columnFor,
@@ -29,6 +30,7 @@ function order(overrides: Partial<BoardOrder> = {}): BoardOrder {
     siteId: "site-1",
     equipmentId: "eq-1",
     equipmentName: "Насос Н-4",
+    downtimeCostPerHour: 360000,
     assigneeId: "w1",
     assigneeName: "Иванов",
     ...overrides,
@@ -123,5 +125,21 @@ describe("shiftCounters", () => {
       now,
     );
     expect(counters).toEqual({ issued: 3, done: 1, overdue: 1, equipmentDown: 1 });
+  });
+});
+
+describe("activeDowntime", () => {
+  it("lists only equipment still standing idle", () => {
+    const items = activeDowntime([
+      order({ downtimeStartedAt: "2026-10-16T09:00:00+05:00" }),
+      order({
+        downtimeStartedAt: "2026-10-16T09:00:00+05:00",
+        downtimeEndedAt: "2026-10-16T10:00:00+05:00",
+      }),
+      order(),
+    ]);
+    expect(items).toEqual([
+      { startedAt: "2026-10-16T09:00:00+05:00", endedAt: null, costPerHour: 360000 },
+    ]);
   });
 });

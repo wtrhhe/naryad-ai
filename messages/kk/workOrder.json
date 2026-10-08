@@ -55,7 +55,9 @@
     "not_found": "Наряд табылмады.",
     "validation": "Өрістердің толтырылуын тексеріңіз.",
     "unavailable": "Қызмет қолжетімсіз. Қайталап көріңіз.",
-    "equipment_not_found": "Жабдық табылмады."
+    "equipment_not_found": "Жабдық табылмады.",
+    "permit_missing": "Бұл жұмыстарға жарамды рұқсат жоқ.",
+    "lockout_photo_required": "LOTO құлпы мен биркасын суретке түсіріңіз."
   },
   "fields": {
     "description": "Сипаттама",

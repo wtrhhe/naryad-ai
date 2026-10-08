@@ -9,7 +9,8 @@ import { Kanban } from "@/components/board/kanban";
 import { LiveRefresh } from "@/components/board/live-refresh";
 import { ShiftCounters } from "@/components/board/shift-counters";
 import { WorkersStrip } from "@/components/board/workers-strip";
-import { applyFilters, buildColumns, shiftCounters } from "@/lib/board/model";
+import { activeDowntime, applyFilters, buildColumns, shiftCounters } from "@/lib/board/model";
+import { DowntimeTotal } from "@/components/downtime/downtime-counter";
 import { loadBoard } from "@/lib/board/queries";
 import { currentShiftWindow } from "@/lib/board/shift";
 import { WORK_ORDER_PRIORITIES } from "@/lib/domain/work-order-schemas";
@@ -72,7 +73,10 @@ export default async function MasterBoardPage({
           </Link>
         </div>
       </div>
-      <ShiftCounters counters={shiftCounters(visible, shift, now)} />
+      <div className="grid gap-3 lg:grid-cols-[1fr_auto]">
+        <ShiftCounters counters={shiftCounters(visible, shift, now)} />
+        <DowntimeTotal items={activeDowntime(visible)} />
+      </div>
       <WorkersStrip workers={data.workers} />
       <BoardFilters
         firstFieldId={FILTER_FIELD_ID}

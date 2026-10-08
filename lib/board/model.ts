@@ -32,6 +32,7 @@ export interface BoardOrder {
   siteId: string;
   equipmentId: string;
   equipmentName: string;
+  downtimeCostPerHour: number;
   assigneeId: string | null;
   assigneeName: string | null;
 }
@@ -162,4 +163,14 @@ export function shiftCounters(
     overdue: orders.filter((order) => columnFor(order, now) === "overdue").length,
     equipmentDown: down.size,
   };
+}
+
+export function activeDowntime(orders: readonly BoardOrder[]) {
+  return orders
+    .filter((order) => order.downtimeStartedAt !== null && order.downtimeEndedAt === null)
+    .map((order) => ({
+      startedAt: order.downtimeStartedAt as string,
+      endedAt: null,
+      costPerHour: order.downtimeCostPerHour,
+    }));
 }
