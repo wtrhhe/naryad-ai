@@ -84,14 +84,17 @@ export function maxPoints(weights: RatingWeights): Record<RatingComponentKey, nu
   };
 }
 
+export type RatingBenchmark = Record<RatingComponentKey, number>;
+
 export function weakestComponent(
   rating: ExplainableRating,
   weights: RatingWeights,
+  benchmark?: RatingBenchmark | null,
 ): RatingComponentKey | null {
-  const max = maxPoints(weights);
+  const target = benchmark ?? maxPoints(weights);
   const gaps = RATING_COMPONENT_KEYS.map((key) => ({
     key,
-    gap: max[key] - rating.contributions[key],
+    gap: target[key] - rating.contributions[key],
   })).sort((a, b) => b.gap - a.gap);
   const top = gaps[0];
   return top && top.gap >= MIN_TIP_GAP ? top.key : null;
@@ -100,6 +103,7 @@ export function weakestComponent(
 export function explanationLines(
   rating: ExplainableRating,
   weights: RatingWeights,
+  benchmark?: RatingBenchmark | null,
 ): ExplanationLine[] {
   const refusals: ExplanationLine[] =
     rating.unexcusedRefusals > 0
@@ -163,7 +167,7 @@ export function explanationLines(
     },
   });
   lines.push(...refusals);
-  const weakest = weakestComponent(rating, weights);
+  const weakest = weakestComponent(rating, weights, benchmark);
   if (weakest) lines.push({ key: TIP_KEYS[weakest], values: {} });
   return lines;
 }
@@ -181,8 +185,9 @@ export function templateExplanation(
   rating: ExplainableRating,
   weights: RatingWeights,
   locale: Locale,
+  benchmark?: RatingBenchmark | null,
 ): RatingExplanation {
-  const lines = renderExplanation(explanationLines(rating, weights), locale);
+  const lines = renderExplanation(explanationLines(rating, weights, benchmark), locale);
   return { text: lines.join(" "), lines, source: "template" };
 }
 
@@ -233,12 +238,13 @@ export interface ExplainRatingInput {
   rating: ExplainableRating;
   weights: RatingWeights;
   locale: Locale;
+  benchmark?: RatingBenchmark | null;
   cacheKey?: string;
   provider?: AiProvider;
 }
 
 export async function explainRating(input: ExplainRatingInput): Promise<RatingExplanation> {
-  const template = templateExplanation(input.rating, input.weights, input.locale);
+  const template = templateExplanation(input.rating, input.weights, input.locale, input.benchmark);
   const provider = input.provider ?? getAiProvider();
   if (!provider.enabled || input.rating.closedCount === 0) return template;
   try {

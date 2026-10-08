@@ -103,6 +103,18 @@ describe("weakestComponent", () => {
       ),
     ).toBe("quality");
   });
+
+  it("compares with the peer benchmark when it is known", () => {
+    const peers = { quality: 30, onTime: 20, noRework: 17, volume: 4 };
+    expect(weakestComponent(rating(), DEFAULT_RATING_WEIGHTS, peers)).toBe("noRework");
+    expect(
+      weakestComponent(
+        rating({ contributions: { quality: 31, onTime: 21, noRework: 17, volume: 5 } }),
+        DEFAULT_RATING_WEIGHTS,
+        peers,
+      ),
+    ).toBeNull();
+  });
 });
 
 describe("explainRating", () => {

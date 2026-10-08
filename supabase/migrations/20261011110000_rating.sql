@@ -90,7 +90,7 @@ begin
       or w.assignee_id = viewer.employee_id
       or (viewer.brigade_id is not null and coalesce(a.brigade_id, w.brigade_id) = viewer.brigade_id)
     )
-  order by w.closed_at desc;
+  order by w.closed_at desc, w.id;
 end;
 $$;
 
@@ -135,7 +135,7 @@ begin
           )
       )
     )
-  order by w.issued_at;
+  order by w.issued_at, w.id;
 end;
 $$;
 
@@ -173,7 +173,7 @@ begin
       or ev.actor_id = viewer.employee_id
       or (viewer.brigade_id is not null and e.brigade_id = viewer.brigade_id)
     )
-  order by ev.occurred_at;
+  order by ev.occurred_at, ev.id;
 end;
 $$;
 
