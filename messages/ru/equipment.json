@@ -1,1 +1,137 @@
-{}
+{
+  "list": {
+    "title": "Оборудование",
+    "search": "Поиск",
+    "searchPlaceholder": "Название или инвентарный номер",
+    "site": "Участок",
+    "allSites": "Все участки",
+    "empty": "Ничего не найдено",
+    "count": "{count, plural, one {# единица} few {# единицы} many {# единиц} other {# единицы}}",
+    "unplanned": "Внеплановых за 30 дней: {count}",
+    "lockout": "LOTO",
+    "down": "В простое",
+    "openMemory": "Память оборудования"
+  },
+  "type": {
+    "crusher": "Дробилка",
+    "conveyor": "Конвейер",
+    "pump": "Насос",
+    "screen": "Грохот",
+    "mill": "Мельница",
+    "classifier": "Классификатор",
+    "feeder": "Питатель",
+    "fan": "Вентилятор",
+    "compressor": "Компрессор",
+    "other": "Прочее"
+  },
+  "criticality": "Критичность {level} из 3",
+  "risk": {
+    "label": "Риск отказа",
+    "score": "{score} из 100",
+    "level": {
+      "low": "Низкий риск",
+      "medium": "Средний риск",
+      "high": "Высокий риск"
+    },
+    "reasons": {
+      "frequent": "Внеплановых за 30 дней: {value}",
+      "growing": "Отказов больше, чем месяцем ранее: +{value}",
+      "repeat": "Один и тот же отказ {value} раза за 60 дней",
+      "rca": "Открытых RCA: {value}",
+      "critical": "Критичное оборудование",
+      "insight": "Аналитика оценила риск как значимый"
+    }
+  },
+  "sentence": {
+    "repeat": "{equipment}: {fault} {count}-й раз за {days, plural, one {# день} few {# дня} many {# дней} other {# дня}}",
+    "once": "{equipment}: {fault} — последний раз {days, plural, =0 {сегодня} one {# день назад} few {# дня назад} many {# дней назад} other {# дня назад}}",
+    "noRepeats": "{equipment}: внеплановых отказов за {days, plural, one {# день} few {# дня} many {# дней} other {# дня}} — {count}, повторов нет",
+    "quiet": "{equipment}: внеплановых отказов за {days, plural, one {# день} few {# дня} many {# дней} other {# дня}} не было",
+    "replaced": "меняли: {materials}",
+    "interval": "повтор через {min}–{max, plural, one {# день} few {# дня} many {# дней} other {# дня}}",
+    "intervalExact": "повтор через {days, plural, one {# день} few {# дня} many {# дней} other {# дня}}"
+  },
+  "hint": {
+    "title": "Что проверить в этот раз",
+    "sourceAi": "Подсказка ИИ",
+    "sourceRules": "По истории ремонтов",
+    "rca": "Проверьте гипотезу RCA: {hypothesis}",
+    "materials": "Осмотрите узел, где уже меняли: {materials}",
+    "interval": "Отказ возвращается через {min}–{max} дн. — ищите первопричину, а не только меняйте детали",
+    "lastWork": "Прошлый ремонт, наряд №{number}: {work}",
+    "trend": "Отказы учащаются: {recent} за 30 дней против {previous} месяцем ранее",
+    "general": "Осмотрите узел целиком: крепёж, смазку, нагрев, вибрацию и посторонние шумы"
+  },
+  "memory": {
+    "title": "Память оборудования",
+    "open": "Вся история",
+    "loading": "Загружаем историю оборудования…",
+    "error": "Не удалось загрузить историю оборудования",
+    "retry": "Повторить",
+    "lastRepairs": "Последние ремонты",
+    "noRepairs": "Ремонтов ещё не было",
+    "replaced": "Что меняли за {days} дней",
+    "repeats": "Повторяющиеся отказы за {days} дней",
+    "noRepeats": "Повторов нет",
+    "times": "{count} раза",
+    "interval": "каждые {min}–{max} дн.",
+    "intervalExact": "через {days} дн.",
+    "nextExpected": "ожидаемый повтор ~{date}",
+    "lockout": "Заблокировано под ремонт",
+    "down": "В простое с {time}"
+  },
+  "stats": {
+    "orders": "Нарядов всего",
+    "unplanned": "Внеплановых за {days} дней",
+    "downtime": "Простой за {days} дней",
+    "downtimeTotal": "Простой за всё время",
+    "hours": "{value} ч",
+    "costPerHour": "{cost}/ч"
+  },
+  "timeline": {
+    "title": "Хронология",
+    "empty": "Событий пока нет",
+    "order": "Наряд №{number}",
+    "downtime": "Простой {hours} ч · {cost}",
+    "downtimeOpen": "Простой продолжается",
+    "materials": "Материалы",
+    "work": "Выполнено",
+    "photos": "Фото",
+    "photoKind": {
+      "before": "До",
+      "after": "После",
+      "loto": "LOTO"
+    },
+    "photoMissing": "Фото недоступно",
+    "score": "Оценка {score}",
+    "assignee": "Исполнитель: {name}",
+    "rcaOpened": "Открыто расследование RCA",
+    "rcaClosed": "RCA закрыто",
+    "insight": "Вывод аналитики",
+    "acoustic": "Акустический замер",
+    "acousticKind": {
+      "before": "до ремонта",
+      "after": "после ремонта"
+    },
+    "rms": "RMS {value}",
+    "more": "Показаны последние {shown} из {total}"
+  },
+  "rca": {
+    "title": "Расследования RCA",
+    "empty": "Расследований нет",
+    "status": {
+      "open": "Открыто",
+      "in_progress": "В работе",
+      "closed": "Закрыто"
+    },
+    "rootCause": "Причина",
+    "recommendation": "Рекомендация",
+    "whys": "5 почему",
+    "orders": "Связанных нарядов: {count}"
+  },
+  "insights": {
+    "title": "Выводы аналитики",
+    "empty": "Выводов пока нет",
+    "recommendation": "Рекомендация"
+  }
+}

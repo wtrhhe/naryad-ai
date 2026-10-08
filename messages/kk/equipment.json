@@ -1,1 +1,137 @@
-{}
+{
+  "list": {
+    "title": "Жабдық",
+    "search": "Іздеу",
+    "searchPlaceholder": "Атауы немесе инвентарлық нөмірі",
+    "site": "Учаске",
+    "allSites": "Барлық учаскелер",
+    "empty": "Ештеңе табылмады",
+    "count": "{count, plural, other {# бірлік}}",
+    "unplanned": "30 күндегі жоспардан тыс: {count}",
+    "lockout": "LOTO",
+    "down": "Тұрып қалған",
+    "openMemory": "Жабдық жады"
+  },
+  "type": {
+    "crusher": "Ұсатқыш",
+    "conveyor": "Конвейер",
+    "pump": "Сорғы",
+    "screen": "Грохот",
+    "mill": "Диірмен",
+    "classifier": "Классификатор",
+    "feeder": "Қоректендіргіш",
+    "fan": "Желдеткіш",
+    "compressor": "Компрессор",
+    "other": "Басқа"
+  },
+  "criticality": "Маңыздылығы: {level} / 3",
+  "risk": {
+    "label": "Істен шығу тәуекелі",
+    "score": "{score} / 100",
+    "level": {
+      "low": "Төмен тәуекел",
+      "medium": "Орташа тәуекел",
+      "high": "Жоғары тәуекел"
+    },
+    "reasons": {
+      "frequent": "30 күндегі жоспардан тыс: {value}",
+      "growing": "Бір ай бұрынғыдан көп істен шығу: +{value}",
+      "repeat": "Бір ақау 60 күнде {value} рет қайталанды",
+      "rca": "Ашық RCA: {value}",
+      "critical": "Аса маңызды жабдық",
+      "insight": "Талдау тәуекелді елеулі деп бағалады"
+    }
+  },
+  "sentence": {
+    "repeat": "{equipment}: {fault} — {days} күн ішінде {count} рет",
+    "once": "{equipment}: {fault} — соңғы рет {days, plural, =0 {бүгін} other {# күн бұрын}}",
+    "noRepeats": "{equipment}: {days} күнде жоспардан тыс {count} істен шығу, қайталану жоқ",
+    "quiet": "{equipment}: {days} күн ішінде жоспардан тыс істен шығу болған жоқ",
+    "replaced": "ауыстырылды: {materials}",
+    "interval": "{min}–{max} күн сайын қайталанады",
+    "intervalExact": "{days} күннен кейін қайталанады"
+  },
+  "hint": {
+    "title": "Бұл жолы нені тексеру керек",
+    "sourceAi": "ЖИ кеңесі",
+    "sourceRules": "Жөндеу тарихы бойынша",
+    "rca": "RCA болжамын тексеріңіз: {hypothesis}",
+    "materials": "Бұрын ауыстырылған түйінді қараңыз: {materials}",
+    "interval": "Ақау {min}–{max} күн сайын қайталанады — бөлшектерді ауыстырумен шектелмей, түпкі себебін іздеңіз",
+    "lastWork": "Алдыңғы жөндеу, №{number} наряд: {work}",
+    "trend": "Істен шығу жиілеп барады: соңғы 30 күнде {recent}, оның алдындағы айда {previous}",
+    "general": "Түйінді толық қараңыз: бекітпелер, майлау, қызу, діріл және бөгде шу"
+  },
+  "memory": {
+    "title": "Жабдық жады",
+    "open": "Толық тарих",
+    "loading": "Жабдық тарихы жүктелуде…",
+    "error": "Жабдық тарихын жүктеу мүмкін болмады",
+    "retry": "Қайталау",
+    "lastRepairs": "Соңғы жөндеулер",
+    "noRepairs": "Әзірге жөндеу болған жоқ",
+    "replaced": "{days} күнде не ауыстырылды",
+    "repeats": "{days} күндегі қайталанатын ақаулар",
+    "noRepeats": "Қайталану жоқ",
+    "times": "{count} рет",
+    "interval": "{min}–{max} күн сайын",
+    "intervalExact": "{days} күннен кейін",
+    "nextExpected": "күтілетін қайталану ~{date}",
+    "lockout": "Жөндеуге бұғатталған",
+    "down": "{time} бастап тұрып қалған"
+  },
+  "stats": {
+    "orders": "Барлық наряд",
+    "unplanned": "{days} күндегі жоспардан тыс",
+    "downtime": "{days} күндегі тұрып қалу",
+    "downtimeTotal": "Барлық уақыттағы тұрып қалу",
+    "hours": "{value} сағ",
+    "costPerHour": "{cost}/сағ"
+  },
+  "timeline": {
+    "title": "Хронология",
+    "empty": "Әзірге оқиғалар жоқ",
+    "order": "№{number} наряд",
+    "downtime": "Тұрып қалу {hours} сағ · {cost}",
+    "downtimeOpen": "Тұрып қалу жалғасуда",
+    "materials": "Материалдар",
+    "work": "Орындалды",
+    "photos": "Фото",
+    "photoKind": {
+      "before": "Дейін",
+      "after": "Кейін",
+      "loto": "LOTO"
+    },
+    "photoMissing": "Фото қолжетімсіз",
+    "score": "Баға {score}",
+    "assignee": "Орындаушы: {name}",
+    "rcaOpened": "RCA тергеуі ашылды",
+    "rcaClosed": "RCA жабылды",
+    "insight": "Талдау қорытындысы",
+    "acoustic": "Акустикалық өлшем",
+    "acousticKind": {
+      "before": "жөндеуге дейін",
+      "after": "жөндеуден кейін"
+    },
+    "rms": "RMS {value}",
+    "more": "Соңғы {shown} / {total} көрсетілген"
+  },
+  "rca": {
+    "title": "RCA тергеулері",
+    "empty": "Тергеулер жоқ",
+    "status": {
+      "open": "Ашық",
+      "in_progress": "Жұмыста",
+      "closed": "Жабық"
+    },
+    "rootCause": "Себебі",
+    "recommendation": "Ұсыныс",
+    "whys": "5 неге",
+    "orders": "Байланысты нарядтар: {count}"
+  },
+  "insights": {
+    "title": "Талдау қорытындылары",
+    "empty": "Әзірге қорытынды жоқ",
+    "recommendation": "Ұсыныс"
+  }
+}
