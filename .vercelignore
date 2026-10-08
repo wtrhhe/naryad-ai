@@ -1,0 +1,12 @@
+.claude
+.env*
+!.env.example
+docs
+e2e
+coverage
+playwright-report
+test-results
+supabase/.temp
+supabase/.branches
+.next
+node_modules
