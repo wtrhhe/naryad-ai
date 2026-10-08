@@ -18,6 +18,12 @@ import type offline from "./messages/ru/offline.json";
 import type rating from "./messages/ru/rating.json";
 import type review from "./messages/ru/review.json";
 import type safety from "./messages/ru/safety.json";
+import type dashboard from "./messages/ru/dashboard.json";
+import type equipment from "./messages/ru/equipment.json";
+import type assistant from "./messages/ru/assistant.json";
+import type voice from "./messages/ru/voice.json";
+import type demo from "./messages/ru/demo.json";
+import type qr from "./messages/ru/qr.json";
 import type { Locale } from "./i18n/config";
 
 declare module "next-intl" {
@@ -44,6 +50,12 @@ declare module "next-intl" {
       rating: typeof rating;
       review: typeof review;
       safety: typeof safety;
+      dashboard: typeof dashboard;
+      equipment: typeof equipment;
+      assistant: typeof assistant;
+      voice: typeof voice;
+      demo: typeof demo;
+      qr: typeof qr;
     };
   }
 }

@@ -21,6 +21,12 @@ export const NAMESPACES = [
   "rating",
   "review",
   "safety",
+  "dashboard",
+  "equipment",
+  "assistant",
+  "voice",
+  "demo",
+  "qr",
 ] as const;
 
 export type Namespace = (typeof NAMESPACES)[number];
