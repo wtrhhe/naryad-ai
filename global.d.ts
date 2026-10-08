@@ -9,6 +9,14 @@ import type workerApp from "./messages/ru/workerApp.json";
 import type photos from "./messages/ru/photos.json";
 import type admin from "./messages/ru/admin.json";
 import type board from "./messages/ru/board.json";
+import type acoustic from "./messages/ru/acoustic.json";
+import type ghost from "./messages/ru/ghost.json";
+import type notifications from "./messages/ru/notifications.json";
+import type reports from "./messages/ru/reports.json";
+import type analytics from "./messages/ru/analytics.json";
+import type offline from "./messages/ru/offline.json";
+import type rating from "./messages/ru/rating.json";
+import type review from "./messages/ru/review.json";
 import type { Locale } from "./i18n/config";
 
 declare module "next-intl" {
@@ -26,6 +34,14 @@ declare module "next-intl" {
       photos: typeof photos;
       admin: typeof admin;
       board: typeof board;
+      acoustic: typeof acoustic;
+      ghost: typeof ghost;
+      notifications: typeof notifications;
+      reports: typeof reports;
+      analytics: typeof analytics;
+      offline: typeof offline;
+      rating: typeof rating;
+      review: typeof review;
     };
   }
 }
