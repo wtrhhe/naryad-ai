@@ -639,6 +639,20 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"work_order_transition_rules": {
+                  Row: {
+                    "action": Database["public"]['Enums']["work_order_action"],"from_statuses": (Database["public"]['Enums']["work_order_status"])[],"irreversible": boolean,"requires": (string)[],"roles": (string)[],"to_status": Database["public"]['Enums']["work_order_status"] | null
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "action": Database["public"]['Enums']["work_order_action"],"from_statuses": (Database["public"]['Enums']["work_order_status"])[],"irreversible"?: boolean,"requires"?: (string)[],"roles": (string)[],"to_status"?: Database["public"]['Enums']["work_order_status"] | null
+                  }
+                  Update: {
+                    "action"?: Database["public"]['Enums']["work_order_action"],"from_statuses"?: (Database["public"]['Enums']["work_order_status"])[],"irreversible"?: boolean,"requires"?: (string)[],"roles"?: (string)[],"to_status"?: Database["public"]['Enums']["work_order_status"] | null
+                  }
+                  Relationships: [
+                    
+                  ]
                 },"work_orders": {
                   Row: {
                     "accepted_at": string | null,"assignee_id": string | null,"brigade_id": string | null,"cancelled_at": string | null,"close_comment": string | null,"closed_at": string | null,"comment": string | null,"created_at": string,"description": string,"done_at": string | null,"downtime_cost": number | null,"downtime_ended_at": string | null,"downtime_started_at": string | null,"due_at": string | null,"equipment_id": string,"fault_code_id": string | null,"id": string,"issued_at": string,"kind": Database["public"]['Enums']["work_order_type"],"last_comment": string | null,"master_id": string,"number": number,"paused_at": string | null,"paused_seconds": number,"priority": Database["public"]['Enums']["work_order_priority"],"queue_position": number | null,"queued_at": string | null,"rejected_at": string | null,"review_started_at": string | null,"rework_count": number,"shift_crew": Database["public"]['Enums']["shift_crew"] | null,"shift_period": Database["public"]['Enums']["shift_period"],"site_id": string,"standard_hours": number | null,"started_at": string | null,"status": Database["public"]['Enums']["work_order_status"],"suggested_fault_code_id": string | null,"suggested_standard_hours": number | null,"suggestion": Json | null,"updated_at": string,"work_performed": string | null
@@ -701,7 +715,12 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "attach_standard_triggers":
+            "assignee_board":
+{ Args: { "target_equipment_type"?: Database["public"]['Enums']["equipment_type"] }; Returns: {
+              "active_order_id": string,"active_order_number": number,"brigade_id": string,"closed_on_type": number,"employee_id": string,"full_name": string,"grade": number,"on_shift": boolean,"queue_length": number,"specialty": Database["public"]['Enums']["specialty"]
+            }[]
+                           },
+"attach_standard_triggers":
 { Args: { "target": unknown,"with_updated_at"?: boolean }; Returns: undefined
                            },
 "can_contribute_to_work_order":
@@ -710,8 +729,17 @@ isOneToOne: false
 "can_view_work_order":
 { Args: { "order_id": string }; Returns: boolean
                            },
+"check_start_gate":
+{ Args: { "actor_id": string,"order_id": string }; Returns: Json
+                           },
+"create_work_order":
+{ Args: { "payload": Json }; Returns: Json
+                           },
 "current_app_role":
 { Args: Record<PropertyKey, never>; Returns: Database["public"]['Enums']["app_role"]
+                           },
+"current_brigade_id":
+{ Args: Record<PropertyKey, never>; Returns: string
                            },
 "current_employee_id":
 { Args: Record<PropertyKey, never>; Returns: string
@@ -734,8 +762,37 @@ isOneToOne: false
 "record_login_attempt":
 { Args: { "client_ip"?: unknown,"number": string,"succeeded": boolean }; Returns: undefined
                            },
+"shift_period_at":
+{ Args: { "moment": string }; Returns: Database["public"]['Enums']["shift_period"]
+                           },
 "storage_order_id":
 { Args: { "object_name": string }; Returns: string
+                           },
+"transition_work_order":
+{ Args: { "action": Database["public"]['Enums']["work_order_action"],"order_id": string,"payload"?: Json }; Returns: Json
+                           },
+"wo_actor":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "brigade_id": string,"employee_id": string,"role": string
+            }[]
+                           },
+"wo_apply_status":
+{ Args: { "action": Database["public"]['Enums']["work_order_action"],"next_status": Database["public"]['Enums']["work_order_status"],"payload": Json,"target": Omit<Database["public"]['Tables']["work_orders"]['Row'], Database["public"]['Tables']["work_orders"]['ComputedFields']> }; Returns: undefined
+                           },
+"wo_authorize":
+{ Args: { "actor_brigade": string,"actor_id": string,"actor_role": string,"target": Omit<Database["public"]['Tables']["work_orders"]['Row'], Database["public"]['Tables']["work_orders"]['ComputedFields']> }; Returns: undefined
+                           },
+"wo_raise":
+{ Args: { "code": string }; Returns: undefined
+                           },
+"wo_renumber_queue":
+{ Args: { "worker_id": string }; Returns: undefined
+                           },
+"wo_require":
+{ Args: { "payload": Json,"requirement": string,"target": Omit<Database["public"]['Tables']["work_orders"]['Row'], Database["public"]['Tables']["work_orders"]['ComputedFields']> }; Returns: undefined
+                           },
+"wo_save_closing":
+{ Args: { "payload": Json,"target": Omit<Database["public"]['Tables']["work_orders"]['Row'], Database["public"]['Tables']["work_orders"]['ComputedFields']> }; Returns: undefined
                            }
           }
           Enums: {

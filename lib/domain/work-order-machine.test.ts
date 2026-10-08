@@ -49,11 +49,17 @@ describe("forbidden moves", () => {
   });
 
   it("workers cannot approve their own work", () => {
-    expect(checkTransition("ai_review", "approve", "worker")).toEqual({ ok: false, error: "forbidden" });
+    expect(checkTransition("ai_review", "approve", "worker")).toEqual({
+      ok: false,
+      error: "forbidden",
+    });
   });
 
   it("masters cannot press worker buttons", () => {
-    expect(checkTransition("issued", "accept", "master")).toEqual({ ok: false, error: "forbidden" });
+    expect(checkTransition("issued", "accept", "master")).toEqual({
+      ok: false,
+      error: "forbidden",
+    });
   });
 
   it("managers and admins only observe", () => {
@@ -66,7 +72,10 @@ describe("forbidden moves", () => {
   });
 
   it("issue is not a transition", () => {
-    expect(checkTransition("issued", "issue", "master")).toEqual({ ok: false, error: "invalid_transition" });
+    expect(checkTransition("issued", "issue", "master")).toEqual({
+      ok: false,
+      error: "invalid_transition",
+    });
   });
 });
 

@@ -1,0 +1,86 @@
+{
+  "status": {
+    "issued": "Берілді",
+    "queued": "Кезекте",
+    "accepted": "Қабылданды",
+    "rejected": "Бас тартылды",
+    "in_progress": "Жұмыста",
+    "paused": "Тоқтатылды",
+    "done": "Орындалды",
+    "ai_review": "ЖИ тексеруі",
+    "closed": "Жабылды",
+    "rework": "Қайта өңдеуде",
+    "cancelled": "Болдырылмады"
+  },
+  "action": {
+    "issue": "Беру",
+    "queue": "Кезекке",
+    "accept": "Қабылдау",
+    "reject": "Бас тарту",
+    "start": "Бастау",
+    "pause": "Тоқтату",
+    "resume": "Жалғастыру",
+    "complete": "Орындалды",
+    "submit_review": "Тексеруге",
+    "approve": "Нарядты жабу",
+    "return_rework": "Қайта өңдеуге",
+    "reassign": "Қайта тағайындау",
+    "cancel": "Нарядты болдырмау",
+    "change_priority": "Басымдықты өзгерту",
+    "comment": "Түсініктеме"
+  },
+  "priority": {
+    "emergency": "Апаттық",
+    "high": "Жоғары",
+    "normal": "Қалыпты",
+    "planned": "Жоспарлы"
+  },
+  "kind": {
+    "planned": "Жоспарлы",
+    "unplanned": "Жоспардан тыс"
+  },
+  "overdue": "Мерзімі өтті",
+  "number": "№{number} наряд",
+  "errors": {
+    "invalid_transition": "Бұл әрекет қазір нарядқа қолжетімсіз.",
+    "forbidden": "Бұл әрекетке құқығыңыз жоқ.",
+    "reason_required": "Себебін көрсетіңіз.",
+    "assignee_required": "Орындаушыны таңдаңыз.",
+    "priority_required": "Басымдықты таңдаңыз.",
+    "comment_required": "Түсініктеме қосыңыз.",
+    "closing_required": "Орындалған жұмыстар мен ақау шифрын толтырыңыз.",
+    "after_photo_required": "Жоспардан тыс наряд үшін «кейін» фотосы қажет.",
+    "start_gate_blocked": "Бастауға болмайды: рұқсат немесе бұғаттау өтпеген.",
+    "stale_status": "Наряд өзгерді. Экранды жаңартыңыз.",
+    "not_found": "Наряд табылмады.",
+    "validation": "Өрістердің толтырылуын тексеріңіз.",
+    "unavailable": "Қызмет қолжетімсіз. Қайталап көріңіз.",
+    "equipment_not_found": "Жабдық табылмады."
+  },
+  "fields": {
+    "description": "Сипаттама",
+    "equipment": "Жабдық",
+    "site": "Учаске",
+    "assignee": "Орындаушы",
+    "brigade": "Бригада",
+    "dueAt": "Мерзім",
+    "standardHours": "Норматив, сағ",
+    "priority": "Басымдық",
+    "kind": "Жұмыс түрі",
+    "comment": "Түсініктеме",
+    "workPerformed": "Орындалған жұмыстар",
+    "faultCode": "Ақау шифры",
+    "materials": "Материалдар",
+    "quantity": "Саны",
+    "reason": "Себеп",
+    "photosBefore": "Ақау фотосы",
+    "photosAfter": "«Кейін» фотосы",
+    "master": "Шебер",
+    "issuedAt": "Берілді"
+  },
+  "timeline": {
+    "title": "Хронология",
+    "by": "{name}",
+    "system": "Жүйе"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "status": {
+    "issued": "Выдан",
+    "queued": "В очереди",
+    "accepted": "Принят",
+    "rejected": "Отклонён",
+    "in_progress": "В работе",
+    "paused": "Приостановлен",
+    "done": "Исполнено",
+    "ai_review": "Проверка ИИ",
+    "closed": "Закрыт",
+    "rework": "На доработке",
+    "cancelled": "Отменён"
+  },
+  "action": {
+    "issue": "Выдать",
+    "queue": "В очередь",
+    "accept": "Принять",
+    "reject": "Отклонить",
+    "start": "Начать",
+    "pause": "Приостановить",
+    "resume": "Продолжить",
+    "complete": "Исполнено",
+    "submit_review": "На проверку",
+    "approve": "Закрыть наряд",
+    "return_rework": "На доработку",
+    "reassign": "Переназначить",
+    "cancel": "Отменить наряд",
+    "change_priority": "Изменить приоритет",
+    "comment": "Комментарий"
+  },
+  "priority": {
+    "emergency": "Аварийный",
+    "high": "Высокий",
+    "normal": "Обычный",
+    "planned": "Плановый"
+  },
+  "kind": {
+    "planned": "Плановый",
+    "unplanned": "Внеплановый"
+  },
+  "overdue": "Просрочен",
+  "number": "Наряд №{number}",
+  "errors": {
+    "invalid_transition": "Это действие сейчас недоступно для наряда.",
+    "forbidden": "У вас нет прав на это действие.",
+    "reason_required": "Укажите причину.",
+    "assignee_required": "Выберите исполнителя.",
+    "priority_required": "Выберите приоритет.",
+    "comment_required": "Добавьте комментарий.",
+    "closing_required": "Заполните выполненные работы и шифр неисправности.",
+    "after_photo_required": "Для внепланового наряда нужно фото «после».",
+    "start_gate_blocked": "Нельзя начать: не пройден допуск или блокировка.",
+    "stale_status": "Наряд уже изменился. Обновите экран.",
+    "not_found": "Наряд не найден.",
+    "validation": "Проверьте заполнение полей.",
+    "unavailable": "Сервис недоступен. Повторите попытку.",
+    "equipment_not_found": "Оборудование не найдено."
+  },
+  "fields": {
+    "description": "Описание",
+    "equipment": "Оборудование",
+    "site": "Участок",
+    "assignee": "Исполнитель",
+    "brigade": "Бригада",
+    "dueAt": "Срок",
+    "standardHours": "Норматив, ч",
+    "priority": "Приоритет",
+    "kind": "Тип работ",
+    "comment": "Комментарий",
+    "workPerformed": "Выполненные работы",
+    "faultCode": "Шифр неисправности",
+    "materials": "Материалы",
+    "quantity": "Количество",
+    "reason": "Причина",
+    "photosBefore": "Фото неисправности",
+    "photosAfter": "Фото «после»",
+    "master": "Мастер",
+    "issuedAt": "Выдан"
+  },
+  "timeline": {
+    "title": "Хронология",
+    "by": "{name}",
+    "system": "Система"
+  }
+}

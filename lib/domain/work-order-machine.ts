@@ -31,15 +31,69 @@ export const FINAL_STATUSES: readonly WorkOrderStatus[] = ["closed", "cancelled"
 
 export const TRANSITIONS: Readonly<Record<TransitionAction, TransitionRule>> = {
   queue: { from: ["issued"], to: "queued", roles: ["worker"], requires: [], irreversible: false },
-  accept: { from: ["issued", "queued"], to: "accepted", roles: ["worker"], requires: [], irreversible: false },
-  reject: { from: ["issued", "queued"], to: "rejected", roles: ["worker"], requires: ["reason"], irreversible: true },
-  start: { from: ["accepted", "rework"], to: "in_progress", roles: ["worker"], requires: [], irreversible: false },
-  pause: { from: ["in_progress"], to: "paused", roles: ["worker"], requires: ["reason"], irreversible: false },
-  resume: { from: ["paused"], to: "in_progress", roles: ["worker"], requires: [], irreversible: false },
-  complete: { from: ["in_progress"], to: "done", roles: ["worker"], requires: ["closing"], irreversible: true },
-  submit_review: { from: ["done"], to: "ai_review", roles: ["master", "system"], requires: [], irreversible: false },
-  approve: { from: ["ai_review"], to: "closed", roles: ["master"], requires: [], irreversible: true },
-  return_rework: { from: ["ai_review"], to: "rework", roles: ["master", "system"], requires: ["comment"], irreversible: false },
+  accept: {
+    from: ["issued", "queued"],
+    to: "accepted",
+    roles: ["worker"],
+    requires: [],
+    irreversible: false,
+  },
+  reject: {
+    from: ["issued", "queued"],
+    to: "rejected",
+    roles: ["worker"],
+    requires: ["reason"],
+    irreversible: true,
+  },
+  start: {
+    from: ["accepted", "rework"],
+    to: "in_progress",
+    roles: ["worker"],
+    requires: [],
+    irreversible: false,
+  },
+  pause: {
+    from: ["in_progress"],
+    to: "paused",
+    roles: ["worker"],
+    requires: ["reason"],
+    irreversible: false,
+  },
+  resume: {
+    from: ["paused"],
+    to: "in_progress",
+    roles: ["worker"],
+    requires: [],
+    irreversible: false,
+  },
+  complete: {
+    from: ["in_progress"],
+    to: "done",
+    roles: ["worker"],
+    requires: ["closing"],
+    irreversible: true,
+  },
+  submit_review: {
+    from: ["done"],
+    to: "ai_review",
+    roles: ["master", "system"],
+    requires: [],
+    irreversible: false,
+  },
+  approve: {
+    from: ["ai_review"],
+    to: "closed",
+    roles: ["master"],
+    requires: [],
+    irreversible: true,
+  },
+  return_rework: {
+    from: ["ai_review"],
+    to: "rework",
+    roles: ["master", "system"],
+    requires: ["comment"],
+    irreversible: false,
+  },
   reassign: {
     from: ["issued", "queued", "accepted", "rejected"],
     to: "issued",
@@ -47,8 +101,20 @@ export const TRANSITIONS: Readonly<Record<TransitionAction, TransitionRule>> = {
     requires: ["assignee"],
     irreversible: false,
   },
-  cancel: { from: OPEN_STATUSES, to: "cancelled", roles: ["master"], requires: ["reason"], irreversible: true },
-  change_priority: { from: OPEN_STATUSES, to: null, roles: ["master"], requires: ["priority"], irreversible: false },
+  cancel: {
+    from: OPEN_STATUSES,
+    to: "cancelled",
+    roles: ["master"],
+    requires: ["reason"],
+    irreversible: true,
+  },
+  change_priority: {
+    from: OPEN_STATUSES,
+    to: null,
+    roles: ["master"],
+    requires: ["priority"],
+    irreversible: false,
+  },
   comment: {
     from: [...OPEN_STATUSES, ...FINAL_STATUSES],
     to: null,
@@ -81,7 +147,11 @@ export function isTransitionAction(action: WorkOrderAction): action is Transitio
   return action !== "issue";
 }
 
-export function checkTransition(status: WorkOrderStatus, action: WorkOrderAction, role: ActorRole): TransitionCheck {
+export function checkTransition(
+  status: WorkOrderStatus,
+  action: WorkOrderAction,
+  role: ActorRole,
+): TransitionCheck {
   if (!isTransitionAction(action)) {
     return { ok: false, error: "invalid_transition" };
   }
@@ -95,7 +165,10 @@ export function checkTransition(status: WorkOrderStatus, action: WorkOrderAction
   return { ok: true, to: rule.to, rule };
 }
 
-export function availableActions(status: WorkOrderStatus, role: ActorRole): readonly TransitionAction[] {
+export function availableActions(
+  status: WorkOrderStatus,
+  role: ActorRole,
+): readonly TransitionAction[] {
   return TRANSITION_ACTIONS.filter((action) => checkTransition(status, action, role).ok);
 }
 
