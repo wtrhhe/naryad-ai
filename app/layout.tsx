@@ -4,6 +4,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { resolveTheme, THEME_COOKIE } from "@/lib/theme";
+import { PwaProvider } from "@/components/pwa/pwa-provider";
 import "./globals.css";
 
 const plexSans = IBM_Plex_Sans({
@@ -28,6 +29,13 @@ export async function generateMetadata(): Promise<Metadata> {
     applicationName: t("appName"),
     appleWebApp: { capable: true, title: t("appName"), statusBarStyle: "black-translucent" },
     formatDetection: { telephone: false },
+    icons: {
+      icon: [
+        { url: "/icons/icon.svg", type: "image/svg+xml" },
+        { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    },
   };
 }
 
@@ -47,7 +55,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang={locale} data-theme={theme} className={`${plexSans.variable} ${plexMono.variable}`}>
       <body className="min-h-dvh antialiased">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <PwaProvider>{children}</PwaProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

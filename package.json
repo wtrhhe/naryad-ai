@@ -17,9 +17,10 @@
     "test:e2e": "playwright test",
     "db:start": "supabase start",
     "db:reset": "supabase db reset",
-    "db:test": "supabase test db",
+    "db:test": "supabase test db --db-url postgresql://postgres:postgres@127.0.0.1:54322/postgres",
     "db:types": "supabase gen types typescript --db-url postgresql://postgres:postgres@127.0.0.1:54322/postgres > lib/supabase/database.types.ts",
-    "seed": "node --experimental-strip-types scripts/seed.ts",
+    "seed": "tsx --env-file=.env.local scripts/seed.ts",
+    "icons": "tsx scripts/generate-icons.ts",
     "check": "npm run lint && npm run typecheck && npm test && npm run build"
   },
   "dependencies": {
@@ -45,6 +46,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitest/coverage-v8": "^5.0.3",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
     "prettier": "^3.9.9",

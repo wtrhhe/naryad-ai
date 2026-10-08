@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n/config";
 
-export const NAMESPACES = ["common", "auth", "nav", "shell"] as const;
+export const NAMESPACES = ["common", "auth", "nav", "shell", "pwa"] as const;
 
 export type Namespace = (typeof NAMESPACES)[number];
 
