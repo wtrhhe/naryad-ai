@@ -6,3 +6,5 @@ test-results
 package-lock.json
 supabase/.temp
 lib/supabase/database.types.ts
+.claude
+docs

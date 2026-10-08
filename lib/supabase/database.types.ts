@@ -725,6 +725,9 @@ isOneToOne: false
 "login_lock_seconds":
 { Args: { "lock_minutes"?: number,"max_failures"?: number,"number": string }; Returns: number
                            },
+"login_recent_failures":
+{ Args: { "lock_minutes"?: number,"number": string }; Returns: number
+                           },
 "purge_service_tables":
 { Args: Record<PropertyKey, never>; Returns: undefined
                            },

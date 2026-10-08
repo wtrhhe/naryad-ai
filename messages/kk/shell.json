@@ -1,0 +1,14 @@
+{
+  "language": "Тіл",
+  "theme": "Тақырып",
+  "themeDark": "Қараңғы",
+  "themeLight": "Жарық",
+  "comingSoon": "Бөлім келесі кезеңде пайда болады.",
+  "pages": {
+    "masterBoard": "Ауысым панелі",
+    "masterNewOrder": "Жаңа наряд",
+    "workerOrders": "Менің нарядтарым",
+    "managerDashboard": "Басшының дашборды",
+    "adminReferences": "Анықтамалықтар"
+  }
+}

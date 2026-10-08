@@ -1,0 +1,24 @@
+{
+  "master": {
+    "board": "Ауысым панелі",
+    "newOrder": "Жаңа наряд",
+    "orders": "Нарядтар",
+    "lockouts": "Бұғаттаулар",
+    "analytics": "Талдау"
+  },
+  "worker": {
+    "orders": "Менің нарядтарым",
+    "history": "Жабылғандар",
+    "rating": "Менің рейтингім"
+  },
+  "manager": {
+    "dashboard": "Дашборд",
+    "reports": "Есептер",
+    "analytics": "Талдау"
+  },
+  "admin": {
+    "references": "Анықтамалықтар",
+    "employees": "Қызметкерлер",
+    "settings": "Баптаулар"
+  }
+}

@@ -7,7 +7,10 @@ export default defineConfig([
   ...nextTs,
   {
     rules: {
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
       "@typescript-eslint/consistent-type-imports": "error",
       "no-console": ["error", { allow: ["warn", "error"] }],
     },
@@ -15,8 +18,26 @@ export default defineConfig([
   {
     files: ["app/**/*.tsx", "components/**/*.tsx"],
     rules: {
-      "react/jsx-no-literals": ["error", { noStrings: true, ignoreProps: true, allowedStrings: ["·", "—", "/", ":", "%", "₸", "№", "+", "−", "×"] }],
+      "react/jsx-no-literals": [
+        "error",
+        {
+          noStrings: true,
+          ignoreProps: true,
+          allowedStrings: ["·", "—", "/", ":", "%", "₸", "№", "+", "−", "×"],
+        },
+      ],
     },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "public/sw.js", "supabase/functions/**", "coverage/**", "playwright-report/**", "test-results/**"]),
+  globalIgnores([
+    ".claude/**",
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    "public/sw.js",
+    "supabase/functions/**",
+    "coverage/**",
+    "playwright-report/**",
+    "test-results/**",
+  ]),
 ]);

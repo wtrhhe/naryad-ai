@@ -1,0 +1,24 @@
+{
+  "master": {
+    "board": "Панель смены",
+    "newOrder": "Новый наряд",
+    "orders": "Наряды",
+    "lockouts": "Блокировки",
+    "analytics": "Аналитика"
+  },
+  "worker": {
+    "orders": "Мои наряды",
+    "history": "Закрытые",
+    "rating": "Мой рейтинг"
+  },
+  "manager": {
+    "dashboard": "Дашборд",
+    "reports": "Отчёты",
+    "analytics": "Аналитика"
+  },
+  "admin": {
+    "references": "Справочники",
+    "employees": "Сотрудники",
+    "settings": "Настройки"
+  }
+}

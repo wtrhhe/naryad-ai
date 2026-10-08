@@ -34,16 +34,18 @@ describe("parseServerEnv", () => {
   });
 
   it("rejects an unknown AI provider", () => {
-    expect(() =>
-      parseServerEnv({ ...validServer, AI_PROVIDER: "gpt" }),
-    ).toThrow(/AI_PROVIDER/);
+    expect(() => parseServerEnv({ ...validServer, AI_PROVIDER: "gpt" })).toThrow(/AI_PROVIDER/);
   });
 
   it("requires the service role key", () => {
-    expect(() => parseServerEnv({ AUTH_PIN_PEPPER: "x".repeat(32) })).toThrow(/SUPABASE_SERVICE_ROLE_KEY/);
+    expect(() => parseServerEnv({ AUTH_PIN_PEPPER: "x".repeat(32) })).toThrow(
+      /SUPABASE_SERVICE_ROLE_KEY/,
+    );
   });
 
   it("requires a long PIN pepper", () => {
-    expect(() => parseServerEnv({ ...validServer, AUTH_PIN_PEPPER: "short" })).toThrow(/AUTH_PIN_PEPPER/);
+    expect(() => parseServerEnv({ ...validServer, AUTH_PIN_PEPPER: "short" })).toThrow(
+      /AUTH_PIN_PEPPER/,
+    );
   });
 });

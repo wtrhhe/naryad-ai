@@ -1,0 +1,14 @@
+{
+  "language": "Язык",
+  "theme": "Тема",
+  "themeDark": "Тёмная",
+  "themeLight": "Светлая",
+  "comingSoon": "Раздел появится на следующем этапе.",
+  "pages": {
+    "masterBoard": "Панель смены",
+    "masterNewOrder": "Новый наряд",
+    "workerOrders": "Мои наряды",
+    "managerDashboard": "Дашборд руководителя",
+    "adminReferences": "Справочники"
+  }
+}

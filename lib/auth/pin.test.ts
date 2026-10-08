@@ -5,11 +5,15 @@ const pepper = "p".repeat(32);
 
 describe("derivePinPassword", () => {
   it("is deterministic for the same number and PIN", () => {
-    expect(derivePinPassword("1001", "1234", pepper)).toBe(derivePinPassword("1001", "1234", pepper));
+    expect(derivePinPassword("1001", "1234", pepper)).toBe(
+      derivePinPassword("1001", "1234", pepper),
+    );
   });
 
   it("differs between employees with the same PIN", () => {
-    expect(derivePinPassword("1001", "1234", pepper)).not.toBe(derivePinPassword("1002", "1234", pepper));
+    expect(derivePinPassword("1001", "1234", pepper)).not.toBe(
+      derivePinPassword("1002", "1234", pepper),
+    );
   });
 
   it("produces a password long enough for Supabase Auth", () => {
