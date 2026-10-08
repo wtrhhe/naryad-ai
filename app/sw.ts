@@ -8,6 +8,7 @@ import {
   selectWindowClient,
 } from "../components/pwa/push-payload";
 import { withoutPrivateCaches } from "../components/pwa/runtime-caching";
+import { registerOutboxSync } from "../lib/offline/sw-sync";
 
 declare global {
   interface WorkerGlobalScope extends SerwistGlobalConfig {
@@ -88,5 +89,7 @@ self.addEventListener("notificationclick", (event) => {
     .href;
   event.waitUntil(openNotificationTarget(targetUrl));
 });
+
+registerOutboxSync(self);
 
 serwist.addEventListeners();
