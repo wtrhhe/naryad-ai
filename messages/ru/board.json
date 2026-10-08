@@ -1,0 +1,53 @@
+{
+  "title": "Панель смены",
+  "shift": {
+    "day": "Дневная смена",
+    "night": "Ночная смена",
+    "window": "{start} – {end}"
+  },
+  "newOrder": "Наряд",
+  "counters": {
+    "issued": "Выдано",
+    "done": "Выполнено",
+    "overdue": "Просрочено",
+    "equipmentDown": "В простое"
+  },
+  "workers": {
+    "title": "Люди смены",
+    "free": "Свободен",
+    "busy": "Наряд №{number}",
+    "queue": "В очереди: {count}",
+    "off_shift": "Не на смене",
+    "empty": "Нет исполнителей"
+  },
+  "columns": {
+    "issued": "Выданные",
+    "accepted": "Принятые",
+    "in_progress": "В работе",
+    "queued": "В очереди",
+    "paused": "Приостановлены",
+    "review": "Выполнены / проверка",
+    "overdue": "Просроченные",
+    "rework": "На доработке"
+  },
+  "filters": {
+    "site": "Участок",
+    "equipment": "Оборудование",
+    "assignee": "Исполнитель",
+    "priority": "Приоритет",
+    "all": "Все",
+    "reset": "Сбросить"
+  },
+  "card": {
+    "due": "Срок {time}",
+    "noAssignee": "Без исполнителя"
+  },
+  "emptyColumn": "Пусто",
+  "live": {
+    "connected": "Онлайн",
+    "connecting": "Подключение…",
+    "offline": "Нет связи",
+    "updated": "Обновлено {time}"
+  },
+  "hotkeys": "Клавиши: N — новый наряд, / — фильтр, R — обновить"
+}

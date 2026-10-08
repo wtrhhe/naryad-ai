@@ -1,0 +1,53 @@
+{
+  "title": "Ауысым панелі",
+  "shift": {
+    "day": "Күндізгі ауысым",
+    "night": "Түнгі ауысым",
+    "window": "{start} – {end}"
+  },
+  "newOrder": "Наряд",
+  "counters": {
+    "issued": "Берілді",
+    "done": "Орындалды",
+    "overdue": "Мерзімі өтті",
+    "equipmentDown": "Тұрып қалған"
+  },
+  "workers": {
+    "title": "Ауысым адамдары",
+    "free": "Бос",
+    "busy": "№{number} наряд",
+    "queue": "Кезекте: {count}",
+    "off_shift": "Ауысымда емес",
+    "empty": "Орындаушылар жоқ"
+  },
+  "columns": {
+    "issued": "Берілген",
+    "accepted": "Қабылданған",
+    "in_progress": "Жұмыста",
+    "queued": "Кезекте",
+    "paused": "Тоқтатылған",
+    "review": "Орындалған / тексеру",
+    "overdue": "Мерзімі өткен",
+    "rework": "Қайта өңдеуде"
+  },
+  "filters": {
+    "site": "Учаске",
+    "equipment": "Жабдық",
+    "assignee": "Орындаушы",
+    "priority": "Басымдық",
+    "all": "Барлығы",
+    "reset": "Тазалау"
+  },
+  "card": {
+    "due": "Мерзімі {time}",
+    "noAssignee": "Орындаушысыз"
+  },
+  "emptyColumn": "Бос",
+  "live": {
+    "connected": "Онлайн",
+    "connecting": "Қосылуда…",
+    "offline": "Байланыс жоқ",
+    "updated": "Жаңартылды {time}"
+  },
+  "hotkeys": "Пернелер: N — жаңа наряд, / — сүзгі, R — жаңарту"
+}

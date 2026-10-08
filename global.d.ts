@@ -8,6 +8,7 @@ import type orderCreate from "./messages/ru/orderCreate.json";
 import type workerApp from "./messages/ru/workerApp.json";
 import type photos from "./messages/ru/photos.json";
 import type admin from "./messages/ru/admin.json";
+import type board from "./messages/ru/board.json";
 import type { Locale } from "./i18n/config";
 
 declare module "next-intl" {
@@ -24,6 +25,7 @@ declare module "next-intl" {
       workerApp: typeof workerApp;
       photos: typeof photos;
       admin: typeof admin;
+      board: typeof board;
     };
   }
 }

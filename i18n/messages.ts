@@ -11,6 +11,7 @@ export const NAMESPACES = [
   "workerApp",
   "photos",
   "admin",
+  "board",
 ] as const;
 
 export type Namespace = (typeof NAMESPACES)[number];
