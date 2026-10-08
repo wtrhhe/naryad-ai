@@ -1,1 +1,121 @@
-{}
+{
+  "title": "Рейтинг",
+  "boardTitle": "Рейтинг исполнителей и бригад",
+  "myTitle": "Мой рейтинг",
+  "range": "{start} – {end}",
+  "presets": {
+    "label": "Период",
+    "shift": "Смена",
+    "day": "Сутки",
+    "week": "Неделя",
+    "month": "Месяц",
+    "custom": "Свой период"
+  },
+  "custom": {
+    "from": "С",
+    "to": "По",
+    "apply": "Показать"
+  },
+  "tabs": {
+    "label": "Кого сравнивать",
+    "employees": "Исполнители",
+    "brigades": "Бригады"
+  },
+  "filters": {
+    "site": "Участок",
+    "brigade": "Бригада",
+    "all": "Все",
+    "reset": "Сбросить"
+  },
+  "components": {
+    "quality": "Качество",
+    "onTime": "В срок",
+    "noRework": "Без доработок и повторов",
+    "volume": "Объём и сложность",
+    "penalty": "Штраф за отказы"
+  },
+  "summary": {
+    "closed": "Закрыто нарядов",
+    "average": "Средний рейтинг",
+    "onTime": "Закрыто в срок",
+    "leader": "Лидер периода",
+    "percent": "{value, number}%"
+  },
+  "chart": {
+    "title": "Итог и вклад составляющих",
+    "caption": "Длина полосы — итоговый рейтинг, цвета — сколько баллов принесла каждая составляющая. Штраф за отказы уходит влево от нуля.",
+    "score": "Итог {score, number}",
+    "points": "{value, number}",
+    "penalty": "−{value, number}",
+    "empty": "За период нет данных для графика"
+  },
+  "table": {
+    "title": "Таблица рейтинга",
+    "place": "Место",
+    "employee": "Исполнитель",
+    "brigade": "Бригада",
+    "score": "Рейтинг",
+    "components": "Составляющие",
+    "closed": "Закрыто",
+    "onTime": "В срок",
+    "rework": "Доработки",
+    "repeat": "Повторы",
+    "refusals": "Отказы",
+    "members": "Человек: {count}",
+    "noData": "Нет закрытых нарядов",
+    "empty": "Нет данных за выбранный период",
+    "unknown": "Без имени",
+    "breakdown": "Качество {quality, number}, в срок {onTime, number}, без доработок {noRework, number}, объём {volume, number}, штраф −{penalty, number}"
+  },
+  "weights": "Веса: качество {quality, number}%, в срок {onTime, number}%, без доработок и повторов {noRework, number}%, объём и сложность {volume, number}%; за отказ без уважительной причины −{penalty, number}, не более −{maxPenalty, number}.",
+  "my": {
+    "outOf": "из 100",
+    "place": "Место {place} из {total}",
+    "noPlace": "Место не определено",
+    "closed": "{count, plural, one {# закрытый наряд} few {# закрытых наряда} many {# закрытых нарядов} other {# закрытого наряда}}",
+    "noData": "За выбранный период у вас нет закрытых нарядов.",
+    "breakdown": "Из чего сложился рейтинг",
+    "contribution": "{points, number} из {max, number}",
+    "brigade": "Моя бригада",
+    "brigadePlace": "Место {place} из {total} бригад",
+    "brigadeScore": "Рейтинг бригады",
+    "noBrigade": "Вы не закреплены за бригадой.",
+    "orders": "Последние закрытые наряды",
+    "ordersEmpty": "Закрытых нарядов за период нет.",
+    "noScore": "Без оценки",
+    "scoreLabel": "Оценка"
+  },
+  "raw": {
+    "quality": "Средняя оценка {value, number}",
+    "onTime": "В срок {count} из {total}",
+    "noRework": "Чисто {count} из {total}",
+    "volume": "{hours, number} нормо-ч · {value, number}% от лидера",
+    "penalty": "{count, plural, one {# отказ} few {# отказа} many {# отказов} other {# отказа}} без уважительной причины"
+  },
+  "flags": {
+    "rework": "Доработка",
+    "repeat": "Повторная поломка",
+    "late": "Просрочен",
+    "onTime": "В срок"
+  },
+  "explanation": {
+    "title": "Пояснение",
+    "llm": "Сформулировано ИИ",
+    "template": "Без LLM — по формуле"
+  },
+  "explain": {
+    "noData": "За выбранный период нет закрытых нарядов, поэтому рейтинг равен нулю.",
+    "summary": "Итоговый рейтинг — {score, number} из 100 по {closed, plural, one {# закрытому наряду} other {# закрытым нарядам}}.",
+    "quality": "Качество {value, number} → {points, plural, one {# балл} few {# балла} many {# баллов} other {# балла}} из {max, number}: это средняя оценка ИИ и мастера.",
+    "onTime": "В срок {count} из {total} → {points, plural, one {# балл} few {# балла} many {# баллов} other {# балла}} из {max, number}.",
+    "noRework": "Без доработок и повторных поломок {count} из {total} → {points, plural, one {# балл} few {# балла} many {# баллов} other {# балла}} из {max, number}.",
+    "reworked": "{count, plural, one {# наряд вернулся} few {# наряда вернулись} many {# нарядов вернулись} other {# наряда вернулись}} на доработку.",
+    "repeated": "После {count, plural, one {# наряда} other {# нарядов}} оборудование снова сломалось в течение 7 дней.",
+    "volume": "Объём и сложность: {hours, plural, one {# нормо-час} few {# нормо-часа} many {# нормо-часов} other {# нормо-часа}} ({value, number}% от лучшего результата) → {points, plural, one {# балл} few {# балла} many {# баллов} other {# балла}} из {max, number}.",
+    "refusals": "{count, plural, one {# отказ} few {# отказа} many {# отказов} other {# отказа}} без уважительной причины → −{penalty, number}.",
+    "tipQuality": "Резерв роста — качество: учитывайте замечания проверки, прикладывайте фото и полный отчёт.",
+    "tipOnTime": "Резерв роста — сроки: закрывайте наряды до установленного срока.",
+    "tipNoRework": "Резерв роста — доработки: проверяйте результат перед сдачей, чтобы наряд не возвращался.",
+    "tipVolume": "Резерв роста — объём: берите больше нарядов, в том числе сложных и аварийных."
+  }
+}
