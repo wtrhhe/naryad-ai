@@ -1,6 +1,7 @@
 import { createTranslator } from "next-intl";
 import type { Locale } from "@/i18n/config";
 import { formatTenge } from "@/lib/safety/downtime";
+import { formatDurationWith, formatHours, shortDate } from "@/lib/assistant/units";
 import type {
   AssistantCard,
   DraftCard,
@@ -24,7 +25,6 @@ const MESSAGES = {
 } as const;
 
 const NAME_LIMIT = 5;
-const DECIMAL = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 1 });
 
 function translator(locale: Locale, namespace: string): Translate {
   const translate = createTranslator({
@@ -39,33 +39,8 @@ function answers(locale: Locale): Translate {
   return translator(locale, "assistant.answers");
 }
 
-export function formatHours(hours: number): string {
-  return DECIMAL.format(Math.round(hours * 10) / 10);
-}
-
 export function formatLate(totalMinutes: number, locale: Locale): string {
-  const t = translator(locale, "assistant.units");
-  const minutes = Math.max(0, Math.floor(totalMinutes));
-  if (minutes < 60) {
-    return t("minutes", { count: minutes });
-  }
-  const hours = Math.floor(minutes / 60);
-  if (hours < 48) {
-    const rest = minutes % 60;
-    return rest === 0
-      ? t("hours", { count: hours })
-      : `${t("hours", { count: hours })} ${t("minutes", { count: rest })}`;
-  }
-  const days = Math.floor(hours / 24);
-  const restHours = hours % 24;
-  return restHours === 0
-    ? t("days", { count: days })
-    : `${t("days", { count: days })} ${t("hours", { count: restHours })}`;
-}
-
-export function shortDate(isoDate: string | null): string {
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(isoDate ?? "");
-  return match ? `${match[3]}.${match[2]}.${match[1]}` : (isoDate ?? "");
+  return formatDurationWith(translator(locale, "assistant.units"), totalMinutes);
 }
 
 function joinNames(t: Translate, names: readonly string[], total: number): string {

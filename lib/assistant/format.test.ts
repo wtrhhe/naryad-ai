@@ -4,10 +4,9 @@ import {
   formatCards,
   formatFailure,
   formatHelp,
-  formatHours,
   formatLate,
-  shortDate,
 } from "@/lib/assistant/format";
+import { formatHours, shortDate } from "@/lib/assistant/units";
 import { executeTool } from "@/lib/assistant/tools";
 import type { AssistantCard, WorkersCard } from "@/lib/assistant/types";
 import { FIXTURE_NOW, fakeGateway } from "@/lib/assistant/test-fixtures";
