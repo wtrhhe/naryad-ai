@@ -1,1 +1,36 @@
-{}
+{
+  "orderTitle": "Наряд",
+  "ordersTitle": "Наряды",
+  "historyTitle": "Закрытые наряды",
+  "reasonText": "Причина своими словами (необязательно)",
+  "choose": "Выберите…",
+  "addMaterial": "+ Добавить материал",
+  "less": "Меньше",
+  "more": "Больше",
+  "removeMaterial": "Убрать материал",
+  "submitClosing": "Отправить на проверку",
+  "close": "Отмена",
+  "nobody": "Не назначен",
+  "noDeadline": "Без срока",
+  "lastComment": "Последний комментарий",
+  "photos": {
+    "before": "Фото неисправности",
+    "after": "Фото «после»",
+    "loto": "Фото блокировки LOTO"
+  },
+  "worker": {
+    "offShift": "Не на смене",
+    "busy": "Выполняет наряд №{number}",
+    "queue": "В очереди: {count}",
+    "free": "Свободен"
+  },
+  "queuePosition": "№{position} в очереди",
+  "dueShort": "Срок {time}",
+  "emptyMine": "Нарядов нет. Новые появятся здесь автоматически.",
+  "emptyHistory": "Закрытых нарядов пока нет.",
+  "emptyOrders": "Нарядов нет.",
+  "groups": {
+    "open": "Открытые",
+    "closed": "Закрытые"
+  }
+}

@@ -1,1 +1,36 @@
-{}
+{
+  "orderTitle": "Наряд",
+  "ordersTitle": "Нарядтар",
+  "historyTitle": "Жабылған нарядтар",
+  "reasonText": "Себебін өз сөзіңізбен (міндетті емес)",
+  "choose": "Таңдаңыз…",
+  "addMaterial": "+ Материал қосу",
+  "less": "Азырақ",
+  "more": "Көбірек",
+  "removeMaterial": "Материалды алып тастау",
+  "submitClosing": "Тексеруге жіберу",
+  "close": "Болдырмау",
+  "nobody": "Тағайындалмаған",
+  "noDeadline": "Мерзімсіз",
+  "lastComment": "Соңғы түсініктеме",
+  "photos": {
+    "before": "Ақаудың фотосы",
+    "after": "«Кейінгі» фото",
+    "loto": "LOTO бұғаттау фотосы"
+  },
+  "worker": {
+    "offShift": "Ауысымда емес",
+    "busy": "№{number} нарядты орындауда",
+    "queue": "Кезекте: {count}",
+    "free": "Бос"
+  },
+  "queuePosition": "Кезекте №{position}",
+  "dueShort": "Мерзімі {time}",
+  "emptyMine": "Нарядтар жоқ. Жаңалары осында автоматты түрде пайда болады.",
+  "emptyHistory": "Жабылған нарядтар әзірге жоқ.",
+  "emptyOrders": "Нарядтар жоқ.",
+  "groups": {
+    "open": "Ашық",
+    "closed": "Жабылған"
+  }
+}

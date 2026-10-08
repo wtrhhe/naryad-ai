@@ -12,7 +12,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { RATING_COMPONENT_KEYS } from "@/lib/rating/explain";
+import { RATING_COMPONENT_KEYS } from "@/lib/rating/components";
 import { PENALTY_PATTERN, RATING_SERIES, SERIES_COLOR } from "./palette";
 
 export interface RatingChartRow {
@@ -91,11 +91,7 @@ export function RatingChart({ rows, labelWidth }: { rows: RatingChartRow[]; labe
   const height = rows.length * ROW_HEIGHT + AXIS_HEIGHT;
   return (
     <div className="w-full" style={{ height }}>
-      <ResponsiveContainer
-        width="100%"
-        height="100%"
-        initialDimension={{ width: 320, height }}
-      >
+      <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 320, height }}>
         <BarChart
           data={rows}
           layout="vertical"

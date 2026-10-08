@@ -26,9 +26,7 @@ export async function RatingBoardPage({
       <RatingHeader title={t("boardTitle")} period={search.period} />
       <div className="flex flex-wrap items-end justify-between gap-3">
         <RatingTabs view={search.view} />
-        {withFilters ? (
-          <RatingFilters sites={board.sites} brigades={board.brigadeOptions} />
-        ) : null}
+        {withFilters ? <RatingFilters sites={board.sites} brigades={board.brigadeOptions} /> : null}
       </div>
       <RatingBoardView
         employees={board.employees}

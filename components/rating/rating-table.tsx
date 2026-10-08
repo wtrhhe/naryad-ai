@@ -69,7 +69,10 @@ export function RatingTable({ rows, view }: { rows: RatedRow[]; view: RatingView
               ? t("members", { count: row.memberCount })
               : (row.brigadeName ?? undefined);
             return (
-              <tr key={row.subjectId} className={cn("border-border border-t", idle && "opacity-60")}>
+              <tr
+                key={row.subjectId}
+                className={cn("border-border border-t", idle && "opacity-60")}
+              >
                 <td className="px-3 py-3 align-top">
                   <span
                     className={cn(

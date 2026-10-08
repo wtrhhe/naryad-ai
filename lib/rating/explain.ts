@@ -9,14 +9,8 @@ import type { RatingWeights } from "@/lib/rating/formula";
 
 export type ExplainKey = keyof (typeof ruRating)["explain"];
 
-export type RatingComponentKey = "quality" | "onTime" | "noRework" | "volume";
-
-export const RATING_COMPONENT_KEYS: readonly RatingComponentKey[] = [
-  "quality",
-  "onTime",
-  "noRework",
-  "volume",
-];
+export { RATING_COMPONENT_KEYS, type RatingComponentKey } from "@/lib/rating/components";
+import { RATING_COMPONENT_KEYS, type RatingComponentKey } from "@/lib/rating/components";
 
 export interface ExplanationLine {
   key: ExplainKey;

@@ -84,7 +84,9 @@ export function PeriodSwitcher({
               type="date"
               required
               value={range.from}
-              onChange={(event) => setRange((current) => ({ ...current, from: event.target.value }))}
+              onChange={(event) =>
+                setRange((current) => ({ ...current, from: event.target.value }))
+              }
               className="border-border bg-surface text-foreground focus:border-accent min-h-11 rounded-lg border-2 px-2 text-sm font-medium normal-case"
             />
           </label>

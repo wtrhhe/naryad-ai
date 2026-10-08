@@ -20,7 +20,10 @@ export function ContributionBar({
     <div
       role="img"
       aria-label={t("breakdown", { ...contributions, penalty })}
-      className={cn("bg-surface-raised relative h-3 w-full overflow-hidden rounded-full", className)}
+      className={cn(
+        "bg-surface-raised relative h-3 w-full overflow-hidden rounded-full",
+        className,
+      )}
     >
       <div className="flex h-full">
         {RATING_COMPONENT_KEYS.filter((key) => contributions[key] > 0).map((key) => (
@@ -43,15 +46,7 @@ export function ContributionBar({
   );
 }
 
-export function PointsMeter({
-  value,
-  max,
-  color,
-}: {
-  value: number;
-  max: number;
-  color: string;
-}) {
+export function PointsMeter({ value, max, color }: { value: number; max: number; color: string }) {
   const width = max <= 0 ? 0 : Math.min(100, Math.max(0, (value / max) * 100));
   return (
     <div className="bg-surface-raised h-2.5 w-full overflow-hidden rounded-full" aria-hidden>
