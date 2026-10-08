@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   collectResults,
   mergeTranscript,
@@ -212,8 +212,10 @@ describe("startDictation", () => {
         throw new Error("already started");
       }
     }
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => undefined);
     const log = track();
     startDictation(Broken, ["ru-RU"], "", log.callbacks);
+    warn.mockRestore();
     expect(log.errors).toEqual(["generic"]);
     expect(log.listening).toEqual([false]);
   });
