@@ -3,6 +3,7 @@ import {
   buildMemorySentence,
   fallbackCheckHints,
   lowerFirst,
+  rcaHypothesis,
   repeatInterval,
   summarizeEquipmentMemory,
   type MemoryInput,
@@ -303,5 +304,14 @@ describe("lowerFirst", () => {
     expect(lowerFirst("Течь")).toBe("течь");
     expect(lowerFirst("КИПиА")).toBe("КИПиА");
     expect(lowerFirst("")).toBe("");
+  });
+});
+
+describe("rcaHypothesis", () => {
+  it("prefers the root cause, then the last answered why", () => {
+    const whys = [{ answer: "Износ втулки" }, { answer: "Засорён фильтр " }, { answer: " " }];
+    expect(rcaHypothesis({ rootCause: " Нет регламента ", fiveWhys: whys })).toBe("Нет регламента");
+    expect(rcaHypothesis({ rootCause: null, fiveWhys: whys })).toBe("Засорён фильтр");
+    expect(rcaHypothesis({ rootCause: "", fiveWhys: [] })).toBeNull();
   });
 });

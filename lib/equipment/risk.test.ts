@@ -1,12 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
   assessRisk,
+  insightScoreFromMetrics,
   latestRiskInsights,
   levelForScore,
   levelForSeverity,
   maxRepeat,
   normalizeInsightScore,
   repeatCounts,
+  toRiskInsight,
   unplannedTrend,
   type RiskInsight,
 } from "@/lib/equipment/risk";
@@ -138,6 +140,23 @@ describe("levels and insight helpers", () => {
     expect(normalizeInsightScore(140)).toBe(100);
     expect(normalizeInsightScore(-1)).toBeNull();
     expect(normalizeInsightScore("high")).toBeNull();
+  });
+
+  it("maps insight rows and reads the score from metrics", () => {
+    const row = {
+      id: "i1",
+      kind: "failure_risk",
+      entity_id: "eq-1",
+      severity: 3,
+      metrics: { risk_score: 0.7 },
+      summary: "Риск",
+      recommendation: null,
+      created_at: "2026-10-08T10:00:00Z",
+    };
+    expect(toRiskInsight(row)).toMatchObject({ entityId: "eq-1", score: 70, severity: 3 });
+    expect(toRiskInsight({ ...row, entity_id: null })).toBeNull();
+    expect(insightScoreFromMetrics({ score: 55 })).toBe(55);
+    expect(insightScoreFromMetrics(null)).toBeNull();
   });
 
   it("keeps the latest risk insight per unit", () => {

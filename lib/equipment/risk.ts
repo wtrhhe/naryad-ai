@@ -130,6 +130,37 @@ export function normalizeInsightScore(value: unknown): number | null {
   return Math.round(clamp(numeric <= 1 ? numeric * 100 : numeric, 0, 100));
 }
 
+export interface InsightRecord {
+  id: string;
+  kind: string;
+  entity_id: string | null;
+  severity: number;
+  metrics: unknown;
+  summary: string;
+  recommendation: string | null;
+  created_at: string;
+}
+
+export function insightScoreFromMetrics(metrics: unknown): number | null {
+  if (!metrics || typeof metrics !== "object") return null;
+  const record = metrics as Record<string, unknown>;
+  return normalizeInsightScore(record.risk_score ?? record.riskScore ?? record.score);
+}
+
+export function toRiskInsight(row: InsightRecord): RiskInsight | null {
+  if (!row.entity_id) return null;
+  return {
+    id: row.id,
+    kind: row.kind,
+    entityId: row.entity_id,
+    severity: row.severity,
+    score: insightScoreFromMetrics(row.metrics),
+    summary: row.summary,
+    recommendation: row.recommendation,
+    createdAt: row.created_at,
+  };
+}
+
 export function assessRisk(signals: RiskSignals): RiskAssessment {
   const reasons: RiskReason[] = [];
   const frequent = Math.min(40, signals.unplannedRecent * 8);

@@ -159,6 +159,14 @@ export interface EquipmentMemoryCard {
   hint: CheckHint;
 }
 
+export function rcaHypothesis(item: {
+  rootCause: string | null;
+  fiveWhys: readonly { answer: string }[];
+}): string | null {
+  const lastAnswer = [...item.fiveWhys].reverse().find((why) => why.answer.trim().length > 0);
+  return item.rootCause?.trim() || lastAnswer?.answer.trim() || null;
+}
+
 function round(value: number, digits = 1): number {
   const factor = 10 ** digits;
   return Math.round(value * factor) / factor;

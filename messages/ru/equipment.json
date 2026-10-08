@@ -36,7 +36,7 @@
     "reasons": {
       "frequent": "Внеплановых за 30 дней: {value}",
       "growing": "Отказов больше, чем месяцем ранее: +{value}",
-      "repeat": "Один и тот же отказ {value} раза за 60 дней",
+      "repeat": "Один и тот же отказ {value, plural, one {# раз} few {# раза} many {# раз} other {# раза}} за 60 дней",
       "rca": "Открытых RCA: {value}",
       "critical": "Критичное оборудование",
       "insight": "Аналитика оценила риск как значимый"
@@ -73,7 +73,7 @@
     "replaced": "Что меняли за {days} дней",
     "repeats": "Повторяющиеся отказы за {days} дней",
     "noRepeats": "Повторов нет",
-    "times": "{count} раза",
+    "times": "{count, plural, one {# раз} few {# раза} many {# раз} other {# раза}}",
     "interval": "каждые {min}–{max} дн.",
     "intervalExact": "через {days} дн.",
     "nextExpected": "ожидаемый повтор ~{date}",
