@@ -21,6 +21,9 @@ export default defineConfig({
     trace: "retain-on-failure",
     locale: "ru-RU",
     timezoneId: "Asia/Qostanay",
+    launchOptions: process.env.PLAYWRIGHT_CHROMIUM_PATH
+      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH }
+      : {},
   },
   projects: [
     { name: "pixel", use: { ...devices["Pixel 7"] } },
