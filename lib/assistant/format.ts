@@ -231,6 +231,10 @@ function formatLookup(card: LookupCard, t: Translate): string {
 }
 
 export function formatCard(card: AssistantCard, locale: Locale): string {
+  return composeCard(card, locale).replace(/\.{2,}/g, ".");
+}
+
+function composeCard(card: AssistantCard, locale: Locale): string {
   const t = answers(locale);
   switch (card.kind) {
     case "workers":

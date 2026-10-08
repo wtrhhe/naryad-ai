@@ -293,6 +293,10 @@ export function wasOverdueDuring(order: OrderRecord, start: Date, cutoff: Date):
   return finishedMs > due.getTime() && finishedMs >= start.getTime();
 }
 
+function withoutCancelled(orders: readonly OrderRecord[]): OrderRecord[] {
+  return orders.filter((order) => order.status !== "cancelled");
+}
+
 function within(iso: string | null, start: Date, end: Date): boolean {
   if (!iso) return false;
   const time = Date.parse(iso);
@@ -377,11 +381,12 @@ async function equipmentHistory(
   }
   const item = resolved.item;
   const since = daysBefore(now, input.days);
-  const [orders, rca, sites] = await Promise.all([
+  const [issued, rca, sites] = await Promise.all([
     gateway.ordersIssuedSince(since, { equipmentId: item.id }),
     gateway.openRca([item.id]),
     gateway.sites(),
   ]);
+  const orders = withoutCancelled(issued);
   const recent = [...orders]
     .sort((left, right) => right.issuedAt.localeCompare(left.issuedAt))
     .slice(0, MAX_RECENT);
@@ -448,12 +453,13 @@ async function siteProblems(
   }
   const site = resolved?.item ?? null;
   const since = daysBefore(now, input.period_days);
-  const [catalog, orders, viewerSites, insights] = await Promise.all([
+  const [catalog, issued, viewerSites, insights] = await Promise.all([
     gateway.equipment(),
     gateway.ordersIssuedSince(since, site ? { siteId: site.id } : {}),
     gateway.viewerSiteIds(),
     gateway.insightsSince(since),
   ]);
+  const orders = withoutCancelled(issued);
   const equipmentIds = new Set(
     catalog.filter((item) => !site || item.siteId === site.id).map((item) => item.id),
   );
