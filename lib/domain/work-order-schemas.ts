@@ -49,6 +49,7 @@ const base = {
   orderId: uuid,
   expectedStatus: z.enum(WORK_ORDER_STATUSES),
   deviceAt: isoDateTime.optional(),
+  clientActionId: uuid.optional(),
 };
 
 const commentText = z.string().trim().min(2).max(4000);
@@ -137,6 +138,7 @@ export function toTransitionPayload(input: TransitionInput): Json {
   return compact({
     expected_status: input.expectedStatus,
     device_at: input.deviceAt,
+    client_action_id: input.clientActionId,
     ...actionPayload(input),
   });
 }

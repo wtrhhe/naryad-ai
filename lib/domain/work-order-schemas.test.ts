@@ -30,6 +30,16 @@ describe("transitionInputSchema", () => {
     expect(result.success).toBe(false);
   });
 
+  it("refuses a client action id that is not a uuid", () => {
+    const result = transitionInputSchema.safeParse({
+      orderId,
+      action: "accept",
+      expectedStatus: "issued",
+      clientActionId: "offline-1",
+    });
+    expect(result.success).toBe(false);
+  });
+
   it("accepts a reason from the catalog without text", () => {
     const result = transitionInputSchema.safeParse({
       orderId,
@@ -82,6 +92,22 @@ describe("toTransitionPayload", () => {
       work_performed: "Заменил сальник",
       fault_code_id: faultCodeId,
       materials: [{ material_id: materialId, quantity: 2 }],
+    });
+  });
+
+  it("carries the device time and the client action id for offline replays", () => {
+    const clientActionId = "55555555-5555-4555-8555-555555555555";
+    const input = transitionInputSchema.parse({
+      orderId,
+      action: "accept",
+      expectedStatus: "issued",
+      deviceAt: "2026-10-11T08:15:00+05:00",
+      clientActionId,
+    });
+    expect(toTransitionPayload(input)).toEqual({
+      expected_status: "issued",
+      device_at: "2026-10-11T08:15:00+05:00",
+      client_action_id: clientActionId,
     });
   });
 
