@@ -138,8 +138,8 @@ export async function runWithRetry<T>(
         if (!classified.retryable || attemptIndex >= maxRetries) {
           return { ok: false, failure: failure(classified.code, classified.message) };
         }
-        const wait = Math.min(classified.retryAfterMs ?? retryDelayMs, MAX_RETRY_WAIT_MS);
-        if (deadline - now() <= wait + 250) {
+        const wait = classified.retryAfterMs ?? retryDelayMs;
+        if (wait > MAX_RETRY_WAIT_MS || deadline - now() <= wait + 250) {
           return { ok: false, failure: failure(classified.code, classified.message) };
         }
         try {

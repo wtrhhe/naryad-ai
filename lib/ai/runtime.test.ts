@@ -144,6 +144,19 @@ describe("runWithRetry", () => {
     });
     expect(result).toEqual({ ok: false, failure: failure("timeout", "No response within 300 ms") });
   });
+
+  it("does not retry when the server asks to wait too long", async () => {
+    const attempt = vi.fn(async () => {
+      throw new Error("429");
+    });
+    const result = await runWithRetry(
+      attempt,
+      () => ({ code: "rate_limited", retryable: true, message: "later", retryAfterMs: 60_000 }),
+      { timeoutMs: 120_000, sleep: noSleep },
+    );
+    expect(result).toEqual({ ok: false, failure: failure("rate_limited", "later") });
+    expect(attempt).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe("abortableSleep", () => {
