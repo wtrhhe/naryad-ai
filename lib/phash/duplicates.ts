@@ -49,3 +49,9 @@ export function findDuplicates(
   }
   return duplicates.sort((a, b) => a.distance - b.distance || a.photoId.localeCompare(b.photoId));
 }
+
+export interface PhotoAnalysis {
+  hashed: number;
+  failed: number;
+  duplicates: PhotoDuplicate[];
+}

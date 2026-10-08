@@ -48,3 +48,25 @@ export function isWithinScoreWindow(createdAt: string, now: Date = new Date()): 
   const elapsed = now.getTime() - created;
   return elapsed >= -60_000 && elapsed <= GHOST_SCORE_WINDOW_MINUTES * 60_000;
 }
+
+export interface ScorablePhoto {
+  author_id: string | null;
+  kind: string;
+  ghost_score: number | null;
+  forced_reason: string | null;
+  created_at: string;
+}
+
+export function canRecordGhostScore(
+  photo: ScorablePhoto,
+  employeeId: string,
+  now: Date = new Date(),
+): boolean {
+  return (
+    photo.author_id === employeeId &&
+    photo.kind === "after" &&
+    photo.ghost_score === null &&
+    photo.forced_reason === null &&
+    isWithinScoreWindow(photo.created_at, now)
+  );
+}
