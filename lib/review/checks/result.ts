@@ -1,4 +1,5 @@
 import { reviewTranslator, type ReviewTranslator } from "@/lib/review/text";
+import { messageValues } from "@/lib/review/values";
 import type {
   CheckFinding,
   CheckKey,
@@ -31,17 +32,6 @@ export function finding(
 export function statusOf(findings: readonly CheckFinding[]): CheckStatus {
   if (findings.some((item) => item.status === "fail")) return "fail";
   return findings.length > 0 ? "warn" : "pass";
-}
-
-export const EMPTY_VALUE = "—";
-
-export function messageValues(values: CheckValues): Record<string, string | number> {
-  return Object.fromEntries(
-    Object.entries(values).map(([name, value]) => [
-      name,
-      value === null ? EMPTY_VALUE : typeof value === "boolean" ? String(value) : value,
-    ]),
-  );
 }
 
 export function renderSummary(t: ReviewTranslator, code: SummaryCode, values: CheckValues): string {

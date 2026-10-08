@@ -57,6 +57,7 @@
     "score": "Рейтинг",
     "components": "Составляющие",
     "closed": "Закрыто",
+    "closedCount": "Закрыто: {count}",
     "onTime": "В срок",
     "rework": "Доработки",
     "repeat": "Повторы",
@@ -87,16 +88,15 @@
   },
   "raw": {
     "quality": "Средняя оценка {value, number}",
-    "onTime": "В срок {count} из {total}",
-    "noRework": "Чисто {count} из {total}",
+    "onTime": "В срок: {count} из {total}",
+    "noRework": "Без возврата и повтора: {count} из {total}",
     "volume": "{hours, number} нормо-ч · {value, number}% от лидера",
     "penalty": "{count, plural, one {# отказ} few {# отказа} many {# отказов} other {# отказа}} без уважительной причины"
   },
   "flags": {
     "rework": "Доработка",
     "repeat": "Повторная поломка",
-    "late": "Просрочен",
-    "onTime": "В срок"
+    "late": "Просрочен"
   },
   "explanation": {
     "title": "Пояснение",

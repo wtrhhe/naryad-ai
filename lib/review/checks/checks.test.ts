@@ -16,7 +16,8 @@ import { checkLockout } from "@/lib/review/checks/lockout";
 import { checkMaterialCategory } from "@/lib/review/checks/material-category";
 import { checkMaterialNorms, median, overPercent } from "@/lib/review/checks/material-norms";
 import { closestMatches, checkPhotos, hammingDistance } from "@/lib/review/checks/photos";
-import { maxSeverity, messageValues, round, statusOf } from "@/lib/review/checks/result";
+import { maxSeverity, round, statusOf } from "@/lib/review/checks/result";
+import { messageValues } from "@/lib/review/values";
 import {
   checkTime,
   lateMinutes,

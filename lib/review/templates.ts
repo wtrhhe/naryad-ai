@@ -1,4 +1,4 @@
-import { messageValues } from "@/lib/review/checks/result";
+import { messageValues } from "@/lib/review/values";
 import { reviewTranslator } from "@/lib/review/text";
 import type { Locale } from "@/i18n/config";
 import type {
